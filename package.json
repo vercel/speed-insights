@@ -1,0 +1,22 @@
+{
+  "name": "speed-insights",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vercel/speed-insights.git"
+  },
+  "license": "MPL-2.0",
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "prettier": "@vercel/style-guide/prettier",
+  "dependencies": {
+    "lint-staged": "^13.2.2"
+  },
+  "devDependencies": {
+    "@vercel/style-guide": "^4.0.2",
+    "husky": "^8.0.3",
+    "prettier": "2.8.8",
+    "typescript": "^5.1.6"
+  },
+  "packageManager": "pnpm@8.6.5"
+}
