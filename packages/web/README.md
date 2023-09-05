@@ -4,7 +4,7 @@
 <div align="center">Performance insights for your website</div>
 <br />
 <div align="center">
-<a href="https://vercel.com/analytics">Website</a>
+<a href="https://vercel.com/docs/speed-insights">Website</a>
 <span> · </span>
 <a href="https://vercel.com/docs/speed-insights/package">Documentation</a>
 <span> · </span>
@@ -23,9 +23,9 @@ This package does **not** track data in development mode.
 2. Add the `@vercel/speed-insights` package to your project
 3. Inject the Analytics script to your app
 
-   - If you are using **Next.js** or **React**, you can use the `<Analytics />` component to inject the script into your app.
+   - If you are using **Next.js** or **React**, you can use the `<Insights />` component to inject the script into your app.
    - For other frameworks, you can use the `inject` function add the tracking script to your app.
-   - If you want to use Vercel Web Analytics on a static site without npm, follow the instructions in the [documentation](https://vercel.com/docs/speed-insights/quickstart).
+   - If you want to use Vercel Speed Insights on a static site without npm, follow the instructions in the [documentation](https://vercel.com/docs/speed-insights/quickstart).
 
 4. Deploy your app to Vercel and see data flowing in.
 
