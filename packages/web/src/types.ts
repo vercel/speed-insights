@@ -1,4 +1,4 @@
-export type SpeedInsightsMetric = {
+export interface SpeedInsightsMetric {
   id: string;
   event_name: string;
   dynamicPath: string | null;
@@ -6,4 +6,4 @@ export type SpeedInsightsMetric = {
   href: string;
   dsn: string;
   speed: string;
-};
+}
