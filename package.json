@@ -11,6 +11,7 @@
   "prettier": "@vercel/style-guide/prettier",
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.4.19",
+    "@vercel/eslint-config": "latest",
     "@vercel/style-guide": "^5.0.1",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
