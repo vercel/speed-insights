@@ -13,6 +13,7 @@
     "lint-staged": "^13.2.2"
   },
   "devDependencies": {
+    "@vercel/eslint-config": "latest",
     "@vercel/style-guide": "^4.0.2",
     "husky": "^8.0.3",
     "prettier": "2.8.8",
