@@ -7,28 +7,52 @@ import {
   onTTFB,
 } from 'web-vitals/attribution';
 import type { Metric } from 'web-vitals';
-import type { SpeedInsightsMetric } from '../types';
+import type { CollectedMetric, SpeedInsightsV2Payload } from '../types';
+import {
+  cutDecimal,
+  getConnectionSpeed,
+  getDomTarget,
+  sendBeacon,
+} from '../utils';
 
-const ENDPOINT = 'https://vitals.vercel-insights.com/v1/vitals';
+export function sendVitals(metrics: CollectedMetric[], dsn: string): void {
+  const speed = getConnectionSpeed();
 
-export function sendVitals(metrics: SpeedInsightsMetric[]): void {
   for (const metric of metrics) {
-    const data = JSON.stringify(metric);
-    if ('keepalive' in Request.prototype) {
-      void fetch(ENDPOINT, {
-        method: 'POST',
-        body: data,
-        keepalive: true,
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    } else if ('sendBeacon' in navigator) {
-      // Use sendBeacon as a fallback
-      navigator.sendBeacon(ENDPOINT, data);
-    }
+    const value = cutDecimal(metric.value, metric.name === 'CLS' ? 4 : 0);
+
+    const vital = {
+      dsn,
+      speed,
+      id: metric.id,
+      event_name: metric.name,
+      page: metric.dynamicPath,
+      value,
+      href: window.location.href.replace('http://', 'https://'), // TODO: remove this
+      //...metric,
+    };
+
+    sendBeacon(vital);
   }
+
+  // // V2 handling
+  // if (!metrics[0]) return;
+  // const payload: SpeedInsightsV2Payload = {
+  //   dsn,
+  //   speed,
+  //   metrics: metrics.map((metric) => ({
+  //     id: metric.id,
+  //     type: metric.event_name,
+  //     value: metric.value,
+  //     dynamicPath: metric.dynamicPath,
+  //     href: metric.href,
+  //     attribution: {
+  //       target: getDomTarget(metric),
+  //     },
+  //   })),
+  // };
+  // const data = JSON.stringify(payload);
+  // sendBeacon(data);
 }
 
 export function watchMetrics(callback: (metric: Metric) => void): void {

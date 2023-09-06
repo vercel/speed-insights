@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
-import type { Metric } from 'web-vitals';
-import { getConnectionSpeed } from '../utils';
-import type { SpeedInsightsMetric } from '../types';
+import type { Metric, MetricWithAttribution } from 'web-vitals';
 import { sendVitals, watchMetrics } from '../generic';
+import type { CollectedMetric } from '../types';
 import { useDynamicPath } from './utils';
 
 interface SpeedInsightsProps {
@@ -12,7 +11,7 @@ interface SpeedInsightsProps {
 
 export function SpeedInsights({ token, sampleRate }: SpeedInsightsProps): null {
   const dynamicPath = useDynamicPath();
-  const vitals = useRef<SpeedInsightsMetric[]>([]);
+  const vitals = useRef<CollectedMetric[]>([]);
 
   const flush = useCallback(() => {
     if (vitals.current.length > 0) {
@@ -23,11 +22,11 @@ export function SpeedInsights({ token, sampleRate }: SpeedInsightsProps): null {
 
       // eslint-disable-next-line no-console -- ok for now
       console.log('flushing', body);
-      sendVitals(body);
+      sendVitals(body, token ?? 'wAkFEOQVq9CTI5O4445EXoD5w1Y');
 
       vitals.current = [];
     }
-  }, [sampleRate]);
+  }, [sampleRate, vitals.current]);
 
   useEffect(() => {
     addEventListener('visibilitychange', flush);
@@ -39,27 +38,16 @@ export function SpeedInsights({ token, sampleRate }: SpeedInsightsProps): null {
   }, [flush]);
 
   const reportVital = useCallback(
-    (metric: Metric): void => {
-      const speed = getConnectionSpeed();
-      const vital = {
-        dynamicPath,
-        speed,
-        id: metric.id,
-        event_name: metric.name,
-        value: metric.value.toFixed(2),
-        href: window.location.href.replace('http://', 'https://'), // TODO: remove this
-        dsn: token ?? 'wAkFEOQVq9CTI5O4445EXoD5w1Y',
-        //...metric,
-      };
+    (metric: MetricWithAttribution): void => {
       // eslint-disable-next-line no-console -- ok for now
-      console.log(vital);
-      vitals.current.push(vital);
+      console.log(metric);
+      vitals.current.push({ ...metric, dynamicPath });
     },
     [dynamicPath],
   );
 
   useEffect(() => {
-    watchMetrics(reportVital);
+    watchMetrics(reportVital as (metric: Metric) => void); // TODO: fix typing -- caused by not properly typed library
   }, []);
 
   return null;
