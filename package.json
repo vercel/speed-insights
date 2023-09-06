@@ -9,12 +9,12 @@
     "prepare": "husky install"
   },
   "prettier": "@vercel/style-guide/prettier",
+  "dependencies": {
+    "lint-staged": "^14.0.1"
+  },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^13.4.19",
-    "@vercel/eslint-config": "latest",
     "@vercel/style-guide": "^5.0.1",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.2",
     "prettier": "3.0.3",
     "typescript": "^5.2.2"
   },

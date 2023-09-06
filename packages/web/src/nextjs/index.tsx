@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { useDynamicPath } from './utils';
+import type { Metric } from 'web-vitals';
 import { getConnectionSpeed } from '../utils';
-import { SpeedInsightsMetric } from '../types';
+import type { SpeedInsightsMetric } from '../types';
 import { sendVitals, watchMetrics } from '../generic';
-import { Metric } from 'web-vitals';
+import { useDynamicPath } from './utils';
 
 interface SpeedInsightsProps {
   token?: string;
@@ -21,6 +21,7 @@ export function SpeedInsights({ token, sampleRate }: SpeedInsightsProps): null {
       }
       const body = vitals.current;
 
+      // eslint-disable-next-line no-console -- ok for now
       console.log('flushing', body);
       sendVitals(body);
 
@@ -50,6 +51,7 @@ export function SpeedInsights({ token, sampleRate }: SpeedInsightsProps): null {
         dsn: token ?? 'wAkFEOQVq9CTI5O4445EXoD5w1Y',
         //...metric,
       };
+      // eslint-disable-next-line no-console -- ok for now
       console.log(vital);
       vitals.current.push(vital);
     },

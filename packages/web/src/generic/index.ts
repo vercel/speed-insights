@@ -6,8 +6,8 @@ import {
   onINP,
   onTTFB,
 } from 'web-vitals/attribution';
-import { Metric } from 'web-vitals';
-import { SpeedInsightsMetric } from '../types';
+import type { Metric } from 'web-vitals';
+import type { SpeedInsightsMetric } from '../types';
 
 const ENDPOINT = 'https://vitals.vercel-insights.com/v1/vitals';
 
@@ -15,7 +15,7 @@ export function sendVitals(metrics: SpeedInsightsMetric[]): void {
   for (const metric of metrics) {
     const data = JSON.stringify(metric);
     if ('keepalive' in Request.prototype) {
-      fetch(ENDPOINT, {
+      void fetch(ENDPOINT, {
         method: 'POST',
         body: data,
         keepalive: true,
@@ -31,7 +31,7 @@ export function sendVitals(metrics: SpeedInsightsMetric[]): void {
   }
 }
 
-export function watchMetrics(callback: (metric: Metric) => void) {
+export function watchMetrics(callback: (metric: Metric) => void): void {
   onCLS(callback);
   onFID(callback);
   onLCP(callback);
