@@ -37,9 +37,7 @@ export function sendBeacon(data: any): void {
         body: blob,
         keepalive: true,
         mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        credentials: 'omit',
       });
       console.log('using fetch');
     } else if ('sendBeacon' in navigator) {
