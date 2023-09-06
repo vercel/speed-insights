@@ -22,9 +22,16 @@ export function getConnectionSpeed(): string {
 const ENDPOINT = 'https://vitals.vercel-insights.com/v1/vitals';
 // const ENDPOINT_V2 = 'https://vitals.vercel-insights.com/v2/vitals';
 
-export function sendBeacon(data: any): void {
+export function sendBeacon(
+  data:
+    | string
+    | string[][]
+    | Record<string, string | number>
+    | URLSearchParams
+    | undefined,
+): void {
   // Convert the array to a URL-encoded string
-  const encodedData = new URLSearchParams(data).toString();
+  const encodedData = new URLSearchParams(data as never).toString();
 
   // Create a Blob object with the encoded data
   const blob = new Blob([encodedData], {
@@ -39,7 +46,6 @@ export function sendBeacon(data: any): void {
         mode: 'no-cors',
         credentials: 'omit',
       });
-      console.log('using fetch');
     } else if ('sendBeacon' in navigator) {
       // Use sendBeacon as a fallback
       navigator.sendBeacon(ENDPOINT, blob);
