@@ -5,10 +5,10 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}): React.ReactNode {
   return (
     <html lang="en">
-      <SpeedInsights />
+      <SpeedInsights token="wAkFEOQVq9CTI5O4445EXoD5w1Y" />
       <body>{children}</body>
     </html>
   );

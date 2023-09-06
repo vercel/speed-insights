@@ -5,7 +5,7 @@ import type { CollectedMetric } from '../types';
 import { useDynamicPath } from './utils';
 
 interface SpeedInsightsProps {
-  token?: string;
+  token: string;
   sampleRate?: number; // Only send a percentage of events to the server to reduce costs
 }
 
@@ -22,7 +22,7 @@ export function SpeedInsights({ token, sampleRate }: SpeedInsightsProps): null {
 
       // eslint-disable-next-line no-console -- ok for now
       console.log('flushing', body);
-      sendVitals(body, token ?? 'wAkFEOQVq9CTI5O4445EXoD5w1Y');
+      sendVitals(body, token);
 
       vitals.current = [];
     }

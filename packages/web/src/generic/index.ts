@@ -21,10 +21,9 @@ export function sendVitals(metrics: CollectedMetric[], dsn: string): void {
       speed,
       id: metric.id,
       event_name: metric.name,
-      ...(metric.dynamicPath && { dynamicPath: metric.dynamicPath }),
       value,
       href: window.location.href.replace('http://', 'https://'), // TODO: remove this
-      //...metric,
+      ...(metric.dynamicPath && { dynamicPath: metric.dynamicPath }),
     };
 
     sendBeacon(vital);

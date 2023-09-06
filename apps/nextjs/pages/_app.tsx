@@ -5,7 +5,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Component {...pageProps} />
-      <SpeedInsights sampleRate={0.5} />
+      <SpeedInsights token="wAkFEOQVq9CTI5O4445EXoD5w1Y" sampleRate={0.5} />
     </>
   );
 }
