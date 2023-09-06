@@ -23,7 +23,7 @@ This package does **not** track data in development mode.
 2. Add the `@vercel/speed-insights` package to your project
 3. Inject the Analytics script to your app
 
-   - If you are using **Next.js** or **React**, you can use the `<Insights />` component to inject the script into your app.
+   - If you are using **Next.js** or **React**, you can use the `<SpeedInsights />` component to inject the script into your app.
    - For other frameworks, you can use the `inject` function add the tracking script to your app.
    - If you want to use Vercel Speed Insights on a static site without npm, follow the instructions in the [documentation](https://vercel.com/docs/speed-insights/quickstart).
 
