@@ -23,12 +23,7 @@ const ENDPOINT = 'https://vitals.vercel-insights.com/v1/vitals';
 // const ENDPOINT_V2 = 'https://vitals.vercel-insights.com/v2/vitals';
 
 export function sendBeacon(
-  data:
-    | string
-    | string[][]
-    | Record<string, string | number>
-    | URLSearchParams
-    | undefined,
+  data: Record<string, string | number> | URLSearchParams | undefined,
 ): void {
   // Convert the array to a URL-encoded string
   const encodedData = new URLSearchParams(data as never).toString();

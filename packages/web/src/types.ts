@@ -9,7 +9,7 @@ export type CollectedMetric = MetricWithAttribution & {
 export interface SpeedInsightsV1Metric {
   id: string;
   event_name: string;
-  dynamicPath: string | null;
+  page: string | null;
   value: string | number;
   href: string;
   dsn: string;

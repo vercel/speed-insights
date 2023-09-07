@@ -1,5 +1,6 @@
 'use client';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SPEED_INSIGHTS_ID } from '../config';
 
 export default function RootLayout({
   children,
@@ -8,7 +9,7 @@ export default function RootLayout({
 }): React.ReactNode {
   return (
     <html lang="en">
-      <SpeedInsights token="wAkFEOQVq9CTI5O4445EXoD5w1Y" />
+      <SpeedInsights token={SPEED_INSIGHTS_ID} />
       <body>{children}</body>
     </html>
   );

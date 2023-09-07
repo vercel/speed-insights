@@ -7,7 +7,7 @@ import {
   onTTFB,
 } from 'web-vitals/attribution';
 import type { Metric } from 'web-vitals';
-import type { CollectedMetric } from '../types';
+import type { CollectedMetric, SpeedInsightsV1Payload } from '../types';
 import { cutDecimal, getConnectionSpeed, sendBeacon } from '../utils';
 
 export function sendVitals(metrics: CollectedMetric[], dsn: string): void {
@@ -23,10 +23,10 @@ export function sendVitals(metrics: CollectedMetric[], dsn: string): void {
       event_name: metric.name,
       value,
       href: window.location.href.replace('http://', 'https://'), // TODO: remove this
-      ...(metric.dynamicPath && { dynamicPath: metric.dynamicPath }),
-    };
+      ...(metric.dynamicPath && { page: metric.dynamicPath }),
+    } as SpeedInsightsV1Payload;
 
-    sendBeacon(vital);
+    sendBeacon(vital as never);
   }
 
   // // V2 handling
