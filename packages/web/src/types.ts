@@ -5,27 +5,14 @@ export type CollectedMetric = MetricWithAttribution & {
   dynamicPath: string | null;
 };
 
-// V1
-export interface SpeedInsightsV1Metric {
-  id: string;
-  event_name: string;
-  page: string | null;
-  value: string | number;
-  href: string;
-  dsn: string;
-  speed: string;
-}
-
-export type SpeedInsightsV1Payload = SpeedInsightsV1Metric;
-
 // V2
-export interface SpeedInsightsV2Payload {
+export interface SpeedInsightsPayload {
   dsn: string;
   speed: string;
-  metrics: SpeedInsightsV2Metric[];
+  metrics: SpeedInsightsMetric[];
 }
 
-export interface SpeedInsightsV2Metric {
+export interface SpeedInsightsMetric {
   id: string;
   type: string;
   value: string | number;

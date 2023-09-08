@@ -7,46 +7,34 @@ import {
   onTTFB,
 } from 'web-vitals/attribution';
 import type { Metric } from 'web-vitals';
-import type { CollectedMetric, SpeedInsightsV1Payload } from '../types';
-import { cutDecimal, getConnectionSpeed, sendBeacon } from '../utils';
+import type { CollectedMetric, SpeedInsightsPayload } from '../types';
+import {
+  formatMetricValue,
+  getConnectionSpeed,
+  getDomTarget,
+  sendBeacon,
+} from '../utils';
 
 export function sendVitals(metrics: CollectedMetric[], dsn: string): void {
   const speed = getConnectionSpeed();
 
-  for (const metric of metrics) {
-    const value = cutDecimal(metric.value, metric.name === 'CLS' ? 4 : 0);
+  if (metrics.length === 0) return;
 
-    const vital = {
-      dsn,
-      speed,
+  const payload: SpeedInsightsPayload = {
+    dsn,
+    speed,
+    metrics: metrics.map((metric) => ({
       id: metric.id,
-      event_name: metric.name,
-      value,
+      type: metric.name,
+      value: formatMetricValue(metric),
+      dynamicPath: metric.dynamicPath,
       href: window.location.href.replace('http://', 'https://'), // TODO: remove this
-      ...(metric.dynamicPath && { page: metric.dynamicPath }),
-    } as SpeedInsightsV1Payload;
-
-    sendBeacon(vital as never);
-  }
-
-  // // V2 handling
-  // if (!metrics[0]) return;
-  // const payload: SpeedInsightsV2Payload = {
-  //   dsn,
-  //   speed,
-  //   metrics: metrics.map((metric) => ({
-  //     id: metric.id,
-  //     type: metric.event_name,
-  //     value: metric.value,
-  //     dynamicPath: metric.dynamicPath,
-  //     href: metric.href,
-  //     attribution: {
-  //       target: getDomTarget(metric),
-  //     },
-  //   })),
-  // };
-  // const data = JSON.stringify(payload);
-  // sendBeacon(data);
+      attribution: {
+        target: getDomTarget(metric),
+      },
+    })),
+  };
+  sendBeacon(payload as never);
 }
 
 export function watchMetrics(callback: (metric: Metric) => void): void {

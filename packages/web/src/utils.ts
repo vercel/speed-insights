@@ -1,4 +1,5 @@
 import type { MetricWithAttribution } from 'web-vitals';
+import type { CollectedMetric } from './types';
 
 export function isBrowser(): boolean {
   return typeof window !== 'undefined';
@@ -19,19 +20,12 @@ export function getConnectionSpeed(): string {
   return speed;
 }
 
-const ENDPOINT = 'https://vitals.vercel-insights.com/v1/vitals';
-// const ENDPOINT_V2 = 'https://vitals.vercel-insights.com/v2/vitals';
+const ENDPOINT = 'https://vitals.vercel-insights.com/v2/vitals';
 
 export function sendBeacon(
   data: Record<string, string | number> | URLSearchParams | undefined,
 ): void {
-  // Convert the array to a URL-encoded string
-  const encodedData = new URLSearchParams(data as never).toString();
-
-  // Create a Blob object with the encoded data
-  const blob = new Blob([encodedData], {
-    type: 'application/x-www-form-urlencoded',
-  });
+  const blob = new Blob([JSON.stringify(data)]);
   try {
     if ('keepalive' in Request.prototype) {
       void fetch(ENDPOINT, {
@@ -71,4 +65,14 @@ export function cutDecimal(number: number, decimals: number): number {
 
   const multiplier = Math.pow(10, decimals);
   return Math.floor(number * multiplier) / multiplier;
+}
+
+export function formatMetricValue(metric: CollectedMetric): number {
+  if (metric.name === 'CLS') {
+    return cutDecimal(metric.value, 4);
+  }
+  if (metric.name === 'FID') {
+    return cutDecimal(metric.value, 2);
+  }
+  return Math.round(metric.value);
 }

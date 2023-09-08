@@ -39,8 +39,6 @@ export function SpeedInsights({ token, sampleRate }: SpeedInsightsProps): null {
 
   const reportVital = useCallback(
     (metric: MetricWithAttribution): void => {
-      // eslint-disable-next-line no-console -- ok for now
-      console.log(metric);
       vitals.current.push({ ...metric, dynamicPath });
     },
     [dynamicPath],
