@@ -25,7 +25,9 @@ const ENDPOINT = 'https://vitals.vercel-insights.com/v2/vitals';
 export function sendBeacon(
   data: Record<string, string | number> | URLSearchParams | undefined,
 ): void {
-  const blob = new Blob([JSON.stringify(data)]);
+  const blob = new Blob([JSON.stringify(data)], {
+    type: 'text/plain',
+  });
   try {
     if ('keepalive' in Request.prototype) {
       void fetch(ENDPOINT, {
