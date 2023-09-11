@@ -1,6 +1,6 @@
 {
   "name": "@vercel/speed-insights",
-  "version": "0.0.1",
+  "version": "0.0.1-beta.1",
   "description": "Speed Insights is a tool for measuring web performance and providing suggestions for improvement.",
   "keywords": [
     "speed-insights",
