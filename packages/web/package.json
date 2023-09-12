@@ -1,6 +1,6 @@
 {
   "name": "@vercel/speed-insights",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.2",
   "description": "Speed Insights is a tool for measuring web performance and providing suggestions for improvement.",
   "keywords": [
     "speed-insights",
@@ -43,7 +43,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "postinstall": "node scripts/postinstall.js",
+    "postinstall": "node scripts/postinstall.js ../../apps/nextjs",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "test": "jest",
