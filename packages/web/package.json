@@ -43,7 +43,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "postinstall": "node scripts/postinstall.js ../../apps/nextjs",
+    "postinstall": "node scripts/postinstall.js",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "test": "jest",
