@@ -1,6 +1,6 @@
 {
   "name": "@vercel/speed-insights",
-  "version": "0.0.1-beta.2",
+  "version": "0.0.1-beta.3",
   "description": "Speed Insights is a tool for measuring web performance and providing suggestions for improvement.",
   "keywords": [
     "speed-insights",
@@ -48,9 +48,6 @@
     "lint-fix": "eslint . --fix",
     "test": "jest",
     "type-check": "tsc --noEmit"
-  },
-  "dependencies": {
-    "web-vitals": "^3.4.0"
   },
   "devDependencies": {
     "@swc/core": "^1.3.82",

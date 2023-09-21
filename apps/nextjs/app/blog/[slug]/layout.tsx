@@ -6,7 +6,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <nav>
         <Link href="/blog/some-slug">Some post</Link>
         <Link href="/blog/another-slug">Another post</Link>
-        <Link href="/blog/test">Testin</Link>
+        <Link href="/blog/test">Testing article</Link>
+        <Link href="/blog">Blog Home</Link>
       </nav>
       {children}
     </div>
