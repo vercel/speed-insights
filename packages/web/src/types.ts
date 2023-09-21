@@ -1,24 +1,44 @@
-import type { MetricWithAttribution } from 'web-vitals';
+export interface SpeedInsightsProps {
+  token?: string;
+  sampleRate?: number; // Only send a percentage of events to the server to reduce costs
+  beforeSend?: BeforeSendMiddleware;
+  debug?: boolean;
+  dynamicPath?: string;
 
-// Internal typings
-export type CollectedMetric = MetricWithAttribution & {
-  dynamicPath: string | null;
-};
-
-// V2
-export interface SpeedInsightsPayload {
-  dsn: string;
-  speed: string;
-  metrics: SpeedInsightsMetric[];
+  scriptSrc?: string;
+  endpoint?: string;
 }
 
-export interface SpeedInsightsMetric {
-  id: string;
-  type: string;
-  value: string | number;
-  dynamicPath: string | null;
-  href: string;
-  attribution: {
-    target?: string;
-  };
+export type EventTypes = 'vital';
+
+export interface Event {
+  type: EventTypes;
+  url: string;
+}
+
+export type BeforeSendMiddleware = (
+  data: Event,
+  // Should we be more strict here? Compiler won't help a lot if it's that loose
+) => Event | null | undefined | false;
+
+export interface Functions {
+  beforeSend?: BeforeSendMiddleware;
+}
+
+export interface SpeedInsights<T extends keyof Functions = keyof Functions> {
+  queue: [T, Functions[T]][];
+  addAction: (action: T, data: Functions[T]) => void;
+}
+
+declare global {
+  interface Window {
+    // Base interface
+    /** Base interface to track events */
+    si?: SpeedInsights['addAction'];
+    /** Queue for speed insights datapoints, before the library is loaded */
+    siq?: SpeedInsights['queue'];
+
+    sil?: boolean;
+    // vam?: Mode;
+  }
 }
