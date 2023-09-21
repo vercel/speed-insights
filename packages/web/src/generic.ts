@@ -3,7 +3,7 @@ import { initQueue } from './queue';
 import type { SpeedInsightsProps } from './types';
 import { isBrowser, isDevelopment } from './utils';
 
-const SCRIPT_URL = `/v1/speed-insights`;
+const SCRIPT_URL = `/_vercel/speed-insights`;
 const SCRIPT_PROD_NAME = 'script.js';
 const SCRIPT_DEBUG_NAME = 'script.debug.js';
 
