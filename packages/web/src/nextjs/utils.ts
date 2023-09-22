@@ -1,16 +1,16 @@
 'use client';
 import { useParams, usePathname } from 'next/navigation';
 
-export const useDynamicPath = (): string | null => {
+export const useRoute = (): string | null => {
   const params = useParams();
   const path = usePathname();
 
-  return computePathname(path, params);
+  return computeRoute(path, params);
 };
 
 // Refined version from dvoytenko
 // https://github.com/vercel/front/pull/25076
-function computePathname(
+function computeRoute(
   pathname: string | null,
   pathParams: Record<string, string | string[]> | null,
 ): string | null {

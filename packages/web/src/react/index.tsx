@@ -4,18 +4,18 @@ import type { SpeedInsightsProps } from '../types';
 import { inject } from '../generic';
 
 export function SpeedInsights(props: SpeedInsightsProps): JSX.Element | null {
-  const scriptDynamicPath = useRef<((path: string) => void) | null>(null);
+  const setScriptRoute = useRef<((path: string) => void) | null>(null);
   useEffect(() => {
     const script = inject(props);
 
-    scriptDynamicPath.current = script?.setDynamicPath || null;
+    setScriptRoute.current = script?.setRoute || null;
   }, []);
 
   useEffect(() => {
-    if (props.dynamicPath && scriptDynamicPath.current) {
-      scriptDynamicPath.current(props.dynamicPath);
+    if (props.route && setScriptRoute.current) {
+      setScriptRoute.current(props.route);
     }
-  }, [props.dynamicPath]);
+  }, [props.route]);
 
   return null;
 }
