@@ -14,7 +14,7 @@ const SCRIPT_DEBUG_NAME = 'script.debug.js';
  * @param [props.beforeSend] - A middleware function to modify events before they are sent. Should return the event object or `null` to cancel the event.
  */
 function inject(props: SpeedInsightsProps): {
-  setDynamicPath: (path: string) => void;
+  setRoute: (route: string) => void;
 } | null {
   if (!isBrowser()) return null;
 
@@ -32,23 +32,23 @@ function inject(props: SpeedInsightsProps): {
   const script = document.createElement('script');
   script.src = src;
   script.defer = true;
-  script.setAttribute('data-sdkn', packageName);
-  script.setAttribute('data-sdkv', version);
+  script.dataset.sdkn = packageName;
+  script.dataset.sdkv = version;
 
   if (props.sampleRate) {
-    script.setAttribute('data-sample-rate', props.sampleRate.toString());
+    script.dataset.sampleRate = props.sampleRate.toString();
   }
-  if (props.dynamicPath) {
-    script.setAttribute('data-dynamic-path', props.dynamicPath);
+  if (props.route) {
+    script.dataset.route = props.route;
   }
   if (props.endpoint) {
-    script.setAttribute('data-endpoint', props.endpoint);
+    script.dataset.endpoint = props.endpoint;
   }
   if (props.token) {
-    script.setAttribute('data-token', props.token);
+    script.dataset.token = props.token;
   }
   if (isDevelopment() && props.debug === false) {
-    script.setAttribute('data-debug', 'false');
+    script.dataset.debug = 'false';
   }
 
   script.onerror = (): void => {
@@ -65,8 +65,8 @@ function inject(props: SpeedInsightsProps): {
   document.head.appendChild(script);
 
   return {
-    setDynamicPath: (path: string): void => {
-      script.dataset.dynamicPath = path;
+    setRoute: (route: string): void => {
+      script.dataset.route = route;
     },
   };
 }

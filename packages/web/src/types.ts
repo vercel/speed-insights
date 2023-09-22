@@ -1,9 +1,9 @@
 export interface SpeedInsightsProps {
   token?: string;
   sampleRate?: number; // Only send a percentage of events to the server to reduce costs
+  route?: string; // The dynamic path if there is any (e.g. /blog/[slug]) otherwise the static path
   beforeSend?: BeforeSendMiddleware;
   debug?: boolean;
-  dynamicPath?: string;
 
   scriptSrc?: string;
   endpoint?: string;

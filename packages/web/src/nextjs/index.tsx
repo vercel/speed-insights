@@ -1,14 +1,12 @@
 import React from 'react';
 import { SpeedInsights as SpeedInsightsScript } from '../react';
 import type { SpeedInsightsProps } from '../types';
-import { useDynamicPath } from './utils';
+import { useRoute } from './utils';
 
 export function SpeedInsights(
-  props: Omit<SpeedInsightsProps, 'dynamicPath'>,
+  props: Omit<SpeedInsightsProps, 'route'>,
 ): JSX.Element {
-  const dynamicPath = useDynamicPath();
+  const route = useRoute();
 
-  return (
-    <SpeedInsightsScript {...(dynamicPath && { dynamicPath })} {...props} />
-  );
+  return <SpeedInsightsScript {...(route && { route })} {...props} />;
 }
