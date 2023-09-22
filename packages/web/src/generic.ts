@@ -48,7 +48,7 @@ function inject(props: SpeedInsightsProps): {
     script.dataset.token = props.token;
   }
   if (isDevelopment() && props.debug === false) {
-    script.dataset.debug = 'false'
+    script.dataset.debug = 'false';
   }
 
   script.onerror = (): void => {
