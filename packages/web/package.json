@@ -1,6 +1,6 @@
 {
   "name": "@vercel/speed-insights",
-  "version": "0.0.1-beta.4",
+  "version": "0.0.1-beta.5",
   "description": "Speed Insights is a tool for measuring web performance and providing suggestions for improvement.",
   "keywords": [
     "speed-insights",
@@ -23,6 +23,11 @@
       "browser": "./dist/next/index.js",
       "import": "./dist/next/index.js",
       "require": "./dist/next/index.cjs"
+    },
+    "./remix": {
+      "browser": "./dist/remix/index.js",
+      "import": "./dist/remix/index.js",
+      "require": "./dist/remix/index.cjs"
     }
   },
   "main": "dist/index.js",
@@ -37,6 +42,9 @@
       ],
       "next": [
         "dist/next/index.d.ts"
+      ],
+      "remix": [
+        "dist/remix/index.d.ts"
       ]
     }
   },
@@ -50,6 +58,7 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@remix-run/react": "^2.0.1",
     "@swc/core": "^1.3.82",
     "@swc/jest": "^0.2.29",
     "@testing-library/jest-dom": "^6.1.2",

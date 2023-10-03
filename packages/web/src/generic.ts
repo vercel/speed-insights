@@ -3,9 +3,8 @@ import { initQueue } from './queue';
 import type { SpeedInsightsProps } from './types';
 import { isBrowser, isDevelopment } from './utils';
 
-const SCRIPT_URL = `/_vercel/speed-insights`;
-const SCRIPT_PROD_NAME = 'script.js';
-const SCRIPT_DEBUG_NAME = 'script.debug.js';
+const DEV_SCRIPT_URL = `https://va.vercel-scripts.com/v1/speed-insights/script.debug.js`;
+const SCRIPT_URL = `/_vercel/speed-insights/script.js`;
 
 /**
  * Injects the Vercel Speed Insights script into the page head and starts tracking page views. Read more in our [documentation](https://vercel.com/docs/speed-insights).
@@ -24,8 +23,7 @@ function inject(props: SpeedInsightsProps): {
     window.si?.('beforeSend', props.beforeSend);
   }
   const src =
-    props.scriptSrc ||
-    `${SCRIPT_URL}/${isDevelopment() ? SCRIPT_DEBUG_NAME : SCRIPT_PROD_NAME}`;
+    props.scriptSrc || (isDevelopment() ? DEV_SCRIPT_URL : SCRIPT_URL);
 
   if (document.head.querySelector(`script[src*="${src}"]`)) return null;
 
