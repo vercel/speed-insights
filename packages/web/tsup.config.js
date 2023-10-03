@@ -31,4 +31,12 @@ export default defineConfig([
       };
     },
   },
+  {
+    ...cfg,
+    entry: {
+      index: 'src/remix/index.tsx',
+    },
+    external: ['react', '@remix-run/react'],
+    outDir: 'dist/remix',
+  },
 ]);
