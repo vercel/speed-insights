@@ -1,4 +1,4 @@
-![Speed Insights](https://github.com/vercel/analytics/blob/main/.github/banner.png)
+![Speed Insights](https://github.com/vercel/speed-insights/blob/main/.github/banner.png)
 
 <div align="center"><strong>Vercel Speed Insights</strong></div>
 <div align="center">Performance insights for your website</div>
