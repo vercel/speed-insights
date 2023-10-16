@@ -15,7 +15,8 @@ const SCRIPT_URL = `/_vercel/speed-insights/script.js`;
 function inject(props: SpeedInsightsProps): {
   setRoute: (route: string) => void;
 } | null {
-  if (!isBrowser()) return null;
+  // When route is null, it means that pages router is not ready yet. Will resolve soon
+  if (!isBrowser() || props.route === null) return null;
 
   initQueue();
 
