@@ -10,13 +10,13 @@ const cfg = {
 };
 
 export default defineConfig([
-  // {
-  //   ...cfg,
-  //   entry: {
-  //     index: 'src/generic.ts',
-  //   },
-  //   outDir: 'dist',
-  // },
+  {
+    ...cfg,
+    entry: {
+      index: 'src/generic.ts',
+    },
+    outDir: 'dist',
+  },
   {
     ...cfg,
     entry: {
