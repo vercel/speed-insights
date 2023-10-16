@@ -9,6 +9,7 @@ export const useRoute = (): string | null => {
   const path = usePathname();
 
   const finalParams = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- can be null on pages router
     if (!params) return null;
     if (Object.keys(params).length !== 0) {
       return params;
