@@ -7,9 +7,10 @@ export function SpeedInsights(props: SpeedInsightsProps): JSX.Element | null {
   const setScriptRoute = useRef<((path: string) => void) | null>(null);
   useEffect(() => {
     const script = inject(props);
-
-    setScriptRoute.current = script?.setRoute || null;
-  }, []);
+    if (script) {
+      setScriptRoute.current = script.setRoute;
+    }
+  }, [props.route]);
 
   useEffect(() => {
     if (props.route && setScriptRoute.current) {
