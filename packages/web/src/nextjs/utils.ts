@@ -8,13 +8,14 @@ export const useRoute = (): string | null => {
   const searchParams = useSearchParams();
   const path = usePathname();
 
-  const merged = useMemo(
-    () => ({
-      ...params,
-      ...Object.fromEntries(searchParams.entries()),
-    }),
-    [params, searchParams],
-  );
+  const finalParams = useMemo(() => {
+    if (!params) return null;
+    if (Object.keys(params).length !== 0) {
+      return params;
+    }
+    // For pages router, we need to use `searchParams` because `params` is an empty object
+    return { ...Object.fromEntries(searchParams.entries()) };
+  }, [params, searchParams]);
 
-  return computeRoute(path, merged);
+  return computeRoute(path, finalParams);
 };
