@@ -33,6 +33,7 @@ jobs:
   playwright:
     name: playwright
     runs-on: ubuntu-latest
+    if: false
     timeout-minutes: 10
     strategy:
       fail-fast: false

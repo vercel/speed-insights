@@ -6,13 +6,12 @@ import { inject } from '../generic';
 export function SpeedInsights(props: SpeedInsightsProps): JSX.Element | null {
   const setScriptRoute = useRef<((path: string) => void) | null>(null);
   useEffect(() => {
-    const script = inject(props);
-
-    setScriptRoute.current = script?.setRoute || null;
-  }, []);
-
-  useEffect(() => {
-    if (props.route && setScriptRoute.current) {
+    if (!setScriptRoute.current) {
+      const script = inject(props);
+      if (script) {
+        setScriptRoute.current = script.setRoute;
+      }
+    } else if (props.route) {
       setScriptRoute.current(props.route);
     }
   }, [props.route]);
