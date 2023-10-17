@@ -51,5 +51,27 @@ describe('utils', () => {
       const expected = '/[...langs]/next-site';
       expect(computeRoute(input, params)).toBe(expected);
     });
+
+    describe('edge case handling (same values for multiple params)', () => {
+      test('should replace based on the priority of the pathParams keys', () => {
+        const input = '/test/test';
+        const params = {
+          teamSlug: 'test',
+          project: 'test',
+        };
+        const expected = '/[teamSlug]/[project]'; // 'teamSlug' takes priority over 'project' based on their order in the params object
+        expect(computeRoute(input, params)).toBe(expected);
+      });
+
+      test('should handle reversed priority', () => {
+        const input = '/test/test';
+        const params = {
+          project: 'test',
+          teamSlug: 'test',
+        };
+        const expected = '/[project]/[teamSlug]'; // 'project' takes priority over 'teamSlug' here due to the reversed order in the params object
+        expect(computeRoute(input, params)).toBe(expected);
+      });
+    });
   });
 });

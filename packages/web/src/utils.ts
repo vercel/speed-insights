@@ -37,8 +37,10 @@ export function computeRoute(
     const value = isValueArray ? valueOrArray.join('/') : valueOrArray;
     const expr = isValueArray ? `...${key}` : key;
 
-    const matcher = new RegExp(`/${value}(?=[/?#]|$)`, 'g');
-    result = result.replace(matcher, `/[${expr}]`);
+    const matcher = new RegExp(`/${value}(?=[/?#]|$)`);
+    if (matcher.test(result)) {
+      result = result.replace(matcher, `/[${expr}]`);
+    }
   }
 
   return result;
