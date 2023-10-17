@@ -2,17 +2,17 @@ import { computeRoute } from './utils';
 
 describe('utils', () => {
   describe('computeRoute', () => {
-    test('should return unchanged pathname if no pathParams provided', () => {
+    it('returns unchanged pathname if no pathParams provided', () => {
       expect(computeRoute('/vercel/next-site/analytics', null)).toBe(
         '/vercel/next-site/analytics',
       );
     });
 
-    test('should return null for null pathname', () => {
+    it('returns null for null pathname', () => {
       expect(computeRoute(null, {})).toBe(null);
     });
 
-    test('should replace segments', () => {
+    it('replaces segments', () => {
       const input = '/vercel/next-site/analytics';
       const params = {
         teamSlug: 'vercel',
@@ -22,7 +22,7 @@ describe('utils', () => {
       expect(computeRoute(input, params)).toBe(expected);
     });
 
-    test('should replace segments even one param is not used', () => {
+    it('replaces segments even one param is not used', () => {
       const input = '/vercel/next-site/analytics';
       const params = {
         lang: 'en',
@@ -33,7 +33,7 @@ describe('utils', () => {
       expect(computeRoute(input, params)).toBe(expected);
     });
 
-    test('should not replace partial segments', () => {
+    it('must not replace partial segments', () => {
       const input = '/next-site/vercel-site';
       const params = {
         teamSlug: 'vercel',
@@ -42,7 +42,7 @@ describe('utils', () => {
       expect(computeRoute(input, params)).toBe(expected);
     });
 
-    test('should handle array segments', () => {
+    it('handles array segments', () => {
       const input = '/en/us/next-site';
       const params = {
         langs: ['en', 'us'],
@@ -50,6 +50,28 @@ describe('utils', () => {
       };
       const expected = '/[...langs]/next-site';
       expect(computeRoute(input, params)).toBe(expected);
+    });
+
+    describe('edge case handling (same values for multiple params)', () => {
+      it('replaces based on the priority of the pathParams keys', () => {
+        const input = '/test/test';
+        const params = {
+          teamSlug: 'test',
+          project: 'test',
+        };
+        const expected = '/[teamSlug]/[project]'; // 'teamSlug' takes priority over 'project' based on their order in the params object
+        expect(computeRoute(input, params)).toBe(expected);
+      });
+
+      it('handles reversed priority', () => {
+        const input = '/test/test';
+        const params = {
+          project: 'test',
+          teamSlug: 'test',
+        };
+        const expected = '/[project]/[teamSlug]'; // 'project' takes priority over 'teamSlug' here due to the reversed order in the params object
+        expect(computeRoute(input, params)).toBe(expected);
+      });
     });
   });
 });
