@@ -57,7 +57,7 @@
   "scripts": {
     "build": "tsup ",
     "dev": "tsup --watch",
-    "postinstall": "node scripts/postinstall.js",
+    "postinstall": "node scripts/postinstall.mjs",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "test": "jest",
