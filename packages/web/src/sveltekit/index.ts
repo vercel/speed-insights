@@ -1,12 +1,10 @@
 import { get } from 'svelte/store';
-import { inject as genericInject } from '../generic';
+import { inject as genericInject, type SpeedInsightsProps } from '../generic';
 import { page } from '$app/stores';
 import { browser } from '$app/environment';
 import type {} from '@sveltejs/kit'; // don't remove, ensures ambient types for $app/* are loaded
 
-type Params = Parameters<typeof genericInject>[0];
-
-export function injectSpeedInsights(props?: Params): void {
+export function injectSpeedInsights(props?: SpeedInsightsProps): void {
   if (browser) {
     const speedInsights = genericInject({
       route: get(page).route.id,
