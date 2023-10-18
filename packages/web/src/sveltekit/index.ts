@@ -2,7 +2,7 @@ import { get } from 'svelte/store';
 import { inject as genericInject } from '../generic';
 import { page } from '$app/stores';
 import { browser } from '$app/environment';
-import type {} from '@sveltejs/kit';
+import type {} from '@sveltejs/kit'; // don't remove, ensures ambient types for $app/* are loaded
 
 type Params = Parameters<typeof genericInject>[0];
 
