@@ -12,7 +12,11 @@ const SCRIPT_URL = `/_vercel/speed-insights/script.js`;
  * @param [props.debug] - Whether to enable debug logging in development. Defaults to `true`.
  * @param [props.beforeSend] - A middleware function to modify events before they are sent. Should return the event object or `null` to cancel the event.
  */
-function inject(props: SpeedInsightsProps): {
+function inject(
+  props: SpeedInsightsProps & {
+    framework?: string;
+  },
+): {
   setRoute: (route: string) => void;
 } | null {
   // When route is null, it means that pages router is not ready yet. Will resolve soon
@@ -20,18 +24,20 @@ function inject(props: SpeedInsightsProps): {
 
   initQueue();
 
-  if (props.beforeSend) {
-    window.si?.('beforeSend', props.beforeSend);
-  }
   const src =
     props.scriptSrc || (isDevelopment() ? DEV_SCRIPT_URL : SCRIPT_URL);
 
   if (document.head.querySelector(`script[src*="${src}"]`)) return null;
 
+  if (props.beforeSend) {
+    window.si?.('beforeSend', props.beforeSend);
+  }
+
   const script = document.createElement('script');
   script.src = src;
   script.defer = true;
-  script.dataset.sdkn = packageName;
+  script.dataset.sdkn =
+    packageName + (props.framework ? `/${props.framework}` : '');
   script.dataset.sdkv = version;
 
   if (props.sampleRate) {

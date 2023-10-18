@@ -39,4 +39,12 @@ export default defineConfig([
     external: ['react', '@remix-run/react'],
     outDir: 'dist/remix',
   },
+  {
+    ...cfg,
+    entry: {
+      index: 'src/sveltekit/index.ts',
+    },
+    external: ['svelte', '@sveltejs/kit', '$app'],
+    outDir: 'dist/sveltekit',
+  },
 ]);

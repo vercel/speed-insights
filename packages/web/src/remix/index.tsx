@@ -8,5 +8,11 @@ export function SpeedInsights(
 ): JSX.Element {
   const route = useRoute();
 
-  return <SpeedInsightsScript {...(route && { route })} {...props} />;
+  return (
+    <SpeedInsightsScript
+      {...(route && { route })}
+      {...props}
+      framework="remix"
+    />
+  );
 }
