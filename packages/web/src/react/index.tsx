@@ -3,11 +3,18 @@ import { useEffect, useRef } from 'react';
 import type { SpeedInsightsProps } from '../types';
 import { inject } from '../generic';
 
-export function SpeedInsights(props: SpeedInsightsProps): JSX.Element | null {
+export function SpeedInsights(
+  props: SpeedInsightsProps & {
+    framework?: string;
+  },
+): JSX.Element | null {
   const setScriptRoute = useRef<((path: string) => void) | null>(null);
   useEffect(() => {
     if (!setScriptRoute.current) {
-      const script = inject(props);
+      const script = inject({
+        framework: props.framework || 'react',
+        ...props,
+      });
       if (script) {
         setScriptRoute.current = script.setRoute;
       }

@@ -11,6 +11,7 @@ export function injectSpeedInsights(props?: Params): void {
     const speedInsights = genericInject({
       route: get(page).route.id,
       ...props,
+      framework: 'sveltekit',
     });
 
     if (speedInsights) {
