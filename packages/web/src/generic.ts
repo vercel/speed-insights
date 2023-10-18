@@ -20,13 +20,14 @@ function inject(props: SpeedInsightsProps): {
 
   initQueue();
 
-  if (props.beforeSend) {
-    window.si?.('beforeSend', props.beforeSend);
-  }
   const src =
     props.scriptSrc || (isDevelopment() ? DEV_SCRIPT_URL : SCRIPT_URL);
 
   if (document.head.querySelector(`script[src*="${src}"]`)) return null;
+
+  if (props.beforeSend) {
+    window.si?.('beforeSend', props.beforeSend);
+  }
 
   const script = document.createElement('script');
   script.src = src;
