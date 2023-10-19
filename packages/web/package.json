@@ -1,6 +1,6 @@
 {
   "name": "@vercel/speed-insights",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Speed Insights is a tool for measuring web performance and providing suggestions for improvement.",
   "keywords": [
     "speed-insights",
@@ -11,7 +11,6 @@
     "directory": "packages/web"
   },
   "license": "MPL-2.0",
-  "type": "module",
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -30,7 +29,7 @@
       "require": "./dist/remix/index.cjs"
     },
     "./sveltekit": {
-      "svelte": "./dist/sveltekit/index.js",
+      "svelte": "./dist/sveltekit/index.mjs",
       "types": "./dist/sveltekit/index.d.ts"
     }
   },
@@ -58,7 +57,7 @@
   "scripts": {
     "build": "tsup ",
     "dev": "tsup --watch",
-    "postinstall": "node scripts/postinstall.js",
+    "postinstall": "node scripts/postinstall.mjs",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "test": "jest",
