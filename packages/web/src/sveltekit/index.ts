@@ -1,5 +1,8 @@
 import { get } from 'svelte/store';
-import { inject as genericInject, type SpeedInsightsProps } from '../generic';
+import {
+  injectSpeedInsights as genericInject,
+  type SpeedInsightsProps,
+} from '../generic';
 import { page } from '$app/stores';
 import { browser } from '$app/environment';
 import type {} from '@sveltejs/kit'; // don't remove, ensures ambient types for $app/* are loaded
