@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import type { SpeedInsightsProps } from '../types';
-import { inject } from '../generic';
+import { injectSpeedInsights } from '../generic';
 
 export function SpeedInsights(
   props: SpeedInsightsProps & {
@@ -11,7 +11,7 @@ export function SpeedInsights(
   const setScriptRoute = useRef<((path: string) => void) | null>(null);
   useEffect(() => {
     if (!setScriptRoute.current) {
-      const script = inject({
+      const script = injectSpeedInsights({
         framework: props.framework || 'react',
         ...props,
       });
