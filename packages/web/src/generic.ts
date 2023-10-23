@@ -12,7 +12,7 @@ const SCRIPT_URL = `/_vercel/speed-insights/script.js`;
  * @param [props.debug] - Whether to enable debug logging in development. Defaults to `true`.
  * @param [props.beforeSend] - A middleware function to modify events before they are sent. Should return the event object or `null` to cancel the event.
  */
-function inject(
+function injectSpeedInsights(
   props: SpeedInsightsProps & {
     framework?: string;
   },
@@ -76,10 +76,10 @@ function inject(
   };
 }
 
-export { inject };
+export { injectSpeedInsights };
 export type { SpeedInsightsProps };
 
 // eslint-disable-next-line import/no-default-export -- Allow default export
 export default {
-  inject,
+  injectSpeedInsights,
 };
