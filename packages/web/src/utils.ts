@@ -32,16 +32,24 @@ export function computeRoute(
 
   let result = pathname;
 
-  for (const [key, valueOrArray] of Object.entries(pathParams)) {
-    const isValueArray = Array.isArray(valueOrArray);
-    const value = isValueArray ? valueOrArray.join('/') : valueOrArray;
-    const expr = isValueArray ? `...${key}` : key;
+  try {
+    for (const [key, valueOrArray] of Object.entries(pathParams)) {
+      const isValueArray = Array.isArray(valueOrArray);
+      const value = isValueArray ? valueOrArray.join('/') : valueOrArray;
+      const expr = isValueArray ? `...${key}` : key;
 
-    const matcher = new RegExp(`/${value}(?=[/?#]|$)`);
-    if (matcher.test(result)) {
-      result = result.replace(matcher, `/[${expr}]`);
+      const matcher = new RegExp(`/${escapeRegExp(value)}(?=[/?#]|$)`);
+      if (matcher.test(result)) {
+        result = result.replace(matcher, `/[${expr}]`);
+      }
     }
-  }
 
-  return result;
+    return result;
+  } catch (e) {
+    return pathname;
+  }
+}
+
+function escapeRegExp(string: string): string {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }

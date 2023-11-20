@@ -52,6 +52,27 @@ describe('utils', () => {
       expect(computeRoute(input, params)).toBe(expected);
     });
 
+    it('handles special characters in url', () => {
+      const input = '/123/test(test';
+      const params = {
+        teamSlug: '123',
+        project: 'test(test',
+      };
+
+      const expected = '/[teamSlug]/[project]';
+      expect(computeRoute(input, params)).toBe(expected);
+    });
+
+    it('handles special more characters', () => {
+      const input = '/123/tes\\t(test/3.*';
+      const params = {
+        teamSlug: '123',
+      };
+
+      const expected = '/[teamSlug]/tes\\t(test/3.*';
+      expect(computeRoute(input, params)).toBe(expected);
+    });
+
     describe('edge case handling (same values for multiple params)', () => {
       it('replaces based on the priority of the pathParams keys', () => {
         const input = '/test/test';
