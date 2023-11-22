@@ -30,7 +30,7 @@
       "require": "./dist/remix/index.cjs"
     },
     "./sveltekit": {
-      "svelte": "./dist/sveltekit/index.mjs",
+      "svelte": "./dist/sveltekit/index.js",
       "types": "./dist/sveltekit/index.d.ts"
     }
   },
