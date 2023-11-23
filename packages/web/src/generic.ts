@@ -17,7 +17,7 @@ function injectSpeedInsights(
     framework?: string;
   },
 ): {
-  setRoute: (route: string) => void;
+  setRoute: (route: string | null) => void;
 } | null {
   // When route is null, it means that pages router is not ready yet. Will resolve soon
   if (!isBrowser() || props.route === null) return null;
@@ -70,8 +70,8 @@ function injectSpeedInsights(
   document.head.appendChild(script);
 
   return {
-    setRoute: (route: string): void => {
-      script.dataset.route = route;
+    setRoute: (route: string | null): void => {
+      script.dataset.route = route ?? undefined;
     },
   };
 }

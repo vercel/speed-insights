@@ -31,6 +31,11 @@
     "./sveltekit": {
       "svelte": "./dist/sveltekit/index.mjs",
       "types": "./dist/sveltekit/index.d.ts"
+    },
+    "./vue": {
+      "browser": "./dist/vue/index.mjs",
+      "import": "./dist/vue/index.mjs",
+      "require": "./dist/vue/index.js"
     }
   },
   "main": "dist/index.js",
@@ -51,6 +56,9 @@
       ],
       "sveltekit": [
         "dist/sveltekit/index.d.ts"
+      ],
+      "vue": [
+        "dist/vue/index.d.ts"
       ]
     }
   },
@@ -80,6 +88,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "svelte": "^4.0.5",
-    "tsup": "7.2.0"
+    "tsup": "7.2.0",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.5"
   }
 }
