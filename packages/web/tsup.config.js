@@ -34,6 +34,14 @@ export default defineConfig([
   {
     ...cfg,
     entry: {
+      index: 'src/nuxt/index.ts',
+    },
+    external: ['vue', 'vue-router'],
+    outDir: 'dist/nuxt',
+  },
+  {
+    ...cfg,
+    entry: {
       index: 'src/remix/index.tsx',
     },
     external: ['react', '@remix-run/react'],

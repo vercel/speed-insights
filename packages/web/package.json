@@ -23,6 +23,11 @@
       "import": "./dist/next/index.js",
       "require": "./dist/next/index.cjs"
     },
+    "./nuxt": {
+      "browser": "./dist/nuxt/index.mjs",
+      "import": "./dist/nuxt/index.mjs",
+      "require": "./dist/nuxt/index.js"
+    },
     "./remix": {
       "browser": "./dist/remix/index.js",
       "import": "./dist/remix/index.js",
@@ -50,6 +55,9 @@
       ],
       "next": [
         "dist/next/index.d.ts"
+      ],
+      "nuxt": [
+        "dist/nuxt/index.d.ts"
       ],
       "remix": [
         "dist/remix/index.d.ts"
