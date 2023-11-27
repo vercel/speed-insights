@@ -11,27 +11,27 @@
     "directory": "packages/web"
   },
   "license": "MPL-2.0",
-  "type": "module",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "browser": "./dist/index.js",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./next": {
       "browser": "./dist/next/index.js",
-      "import": "./dist/next/index.js",
-      "require": "./dist/next/index.cjs"
+      "import": "./dist/next/index.mjs",
+      "require": "./dist/next/index.js"
     },
     "./remix": {
       "browser": "./dist/remix/index.js",
-      "import": "./dist/remix/index.js",
-      "require": "./dist/remix/index.cjs"
+      "import": "./dist/remix/index.mjs",
+      "require": "./dist/remix/index.js"
     },
     "./sveltekit": {
-      "svelte": "./dist/sveltekit/index.js",
-      "types": "./dist/sveltekit/index.d.ts"
+      "svelte": "./dist/sveltekit/index.mjs",
+      "types": "./dist/sveltekit/index.d.ts",
+      "import": "./dist/sveltekit/index.mjs"
     }
   },
   "main": "dist/index.js",
