@@ -14,14 +14,14 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "browser": "./dist/index.js",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "browser": "./dist/index.mjs",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./next": {
-      "browser": "./dist/next/index.js",
-      "import": "./dist/next/index.js",
-      "require": "./dist/next/index.cjs"
+      "browser": "./dist/next/index.mjs",
+      "import": "./dist/next/index.mjs",
+      "require": "./dist/next/index.js"
     },
     "./nuxt": {
       "browser": "./dist/nuxt/index.mjs",
@@ -29,9 +29,9 @@
       "require": "./dist/nuxt/index.js"
     },
     "./remix": {
-      "browser": "./dist/remix/index.js",
-      "import": "./dist/remix/index.js",
-      "require": "./dist/remix/index.cjs"
+      "browser": "./dist/remix/index.mjs",
+      "import": "./dist/remix/index.mjs",
+      "require": "./dist/remix/index.js"
     },
     "./sveltekit": {
       "svelte": "./dist/sveltekit/index.mjs",
