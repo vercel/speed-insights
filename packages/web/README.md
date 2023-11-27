@@ -19,11 +19,13 @@ This package does **not** track data in development mode.
 
 It has 1st class integration with:
 
-- Next.js
-- Nuxt
-- Sveltekit
-- React
-- Vue
+| Framework | Package                            |
+| --------- | ---------------------------------- |
+| Next.js   | `@vercel/speed-insights/next`      |
+| Nuxt      | `@vercel/speed-insights/nuxt`      |
+| Sveltekit | `@vercel/speed-insights/sveltekit` |
+| React     | `@vercel/speed-insights/react`     |
+| Vue       | `@vercel/speed-insights/vue`       |
 
 It also supports application written with other framework, vanila JS or even static websites.
 
