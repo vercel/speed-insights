@@ -1,10 +1,11 @@
-import { name as packageName, version } from '../package.json';
+import { version } from '../package.json';
 import { initQueue } from './queue';
 import type { SpeedInsightsProps } from './types';
 import { isBrowser, isDevelopment } from './utils';
 
 const DEV_SCRIPT_URL = `https://va.vercel-scripts.com/v1/speed-insights/script.debug.js`;
 const SCRIPT_URL = `/_vercel/speed-insights/script.js`;
+const packageName = 'vercel';
 
 /**
  * Injects the Vercel Speed Insights script into the page head and starts tracking page views. Read more in our [documentation](https://vercel.com/docs/speed-insights).
