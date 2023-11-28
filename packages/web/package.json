@@ -14,23 +14,33 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "browser": "./dist/index.js",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "browser": "./dist/index.mjs",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./next": {
-      "browser": "./dist/next/index.js",
-      "import": "./dist/next/index.js",
-      "require": "./dist/next/index.cjs"
+      "browser": "./dist/next/index.mjs",
+      "import": "./dist/next/index.mjs",
+      "require": "./dist/next/index.js"
+    },
+    "./nuxt": {
+      "browser": "./dist/nuxt/index.mjs",
+      "import": "./dist/nuxt/index.mjs",
+      "require": "./dist/nuxt/index.js"
     },
     "./remix": {
-      "browser": "./dist/remix/index.js",
-      "import": "./dist/remix/index.js",
-      "require": "./dist/remix/index.cjs"
+      "browser": "./dist/remix/index.mjs",
+      "import": "./dist/remix/index.mjs",
+      "require": "./dist/remix/index.js"
     },
     "./sveltekit": {
       "svelte": "./dist/sveltekit/index.mjs",
       "types": "./dist/sveltekit/index.d.ts"
+    },
+    "./vue": {
+      "browser": "./dist/vue/index.mjs",
+      "import": "./dist/vue/index.mjs",
+      "require": "./dist/vue/index.js"
     }
   },
   "main": "dist/index.js",
@@ -46,11 +56,17 @@
       "next": [
         "dist/next/index.d.ts"
       ],
+      "nuxt": [
+        "dist/nuxt/index.d.ts"
+      ],
       "remix": [
         "dist/remix/index.d.ts"
       ],
       "sveltekit": [
         "dist/sveltekit/index.d.ts"
+      ],
+      "vue": [
+        "dist/vue/index.d.ts"
       ]
     }
   },
@@ -80,6 +96,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "svelte": "^4.0.5",
-    "tsup": "7.2.0"
+    "tsup": "7.2.0",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.5"
   }
 }

@@ -1,3 +1,7 @@
-export default function Blog() {
-  return <div>My blog page</div>;
+export default function Blog({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) {
+  return <div>My blog page {slug}</div>;
 }

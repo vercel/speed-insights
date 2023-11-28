@@ -17,13 +17,26 @@
 
 This package does **not** track data in development mode.
 
+It has 1st class integration with:
+
+| Framework | Package                            |
+| --------- | ---------------------------------- |
+| Next.js   | `@vercel/speed-insights/next`      |
+| Nuxt      | `@vercel/speed-insights/nuxt`      |
+| Sveltekit | `@vercel/speed-insights/sveltekit` |
+| React     | `@vercel/speed-insights/react`     |
+| Vue       | `@vercel/speed-insights/vue`       |
+
+It also supports application written with other framework, vanila JS or even static websites.
+
 ## Quickstart
 
 1. Enable Vercel Speed Insights for a project in the [Vercel Dashboard](https://vercel.com/dashboard).
 2. Add the `@vercel/speed-insights` package to your project
 3. Inject the Analytics script to your app
 
-   - If you are using **Next.js** or **React**, you can use the `<SpeedInsights />` component to inject the script into your app.
+   - If you are using **Next.js**, **React**, **Nuxt** or **Vue** you can use the framework-specific `<SpeedInsights />` component to inject the script into your app.
+   - If you are using **Sveltekit**, you can use the `injectSpeedInsights()` function `@vercel/speed-insights/sveltekit` in your top-level `+layout.svelte` file.
    - For other frameworks, you can use the `inject` function add the tracking script to your app.
    - If you want to use Vercel Speed Insights on a static site without npm, follow the instructions in the [documentation](https://vercel.com/docs/speed-insights/quickstart).
 
