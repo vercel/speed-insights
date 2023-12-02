@@ -63,4 +63,12 @@ export default defineConfig([
     external: ['vue', 'vue-router'],
     outDir: 'dist/vue',
   },
+  {
+    ...cfg,
+    entry: {
+      index: 'src/react/index.tsx',
+    },
+    external: ['react'],
+    outDir: 'dist/react',
+  },
 ]);
