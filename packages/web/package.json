@@ -1,6 +1,6 @@
 {
   "name": "@vercel/speed-insights",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Speed Insights is a tool for measuring web performance and providing suggestions for improvement.",
   "keywords": [
     "speed-insights",
@@ -27,6 +27,11 @@
       "browser": "./dist/nuxt/index.mjs",
       "import": "./dist/nuxt/index.mjs",
       "require": "./dist/nuxt/index.js"
+    },
+    "./react": {
+      "browser": "./dist/react/index.mjs",
+      "import": "./dist/react/index.mjs",
+      "require": "./dist/react/index.js"
     },
     "./remix": {
       "browser": "./dist/remix/index.mjs",
