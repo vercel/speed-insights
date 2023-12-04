@@ -28,6 +28,11 @@
       "import": "./dist/nuxt/index.mjs",
       "require": "./dist/nuxt/index.js"
     },
+    "./react": {
+      "browser": "./dist/react/index.mjs",
+      "import": "./dist/react/index.mjs",
+      "require": "./dist/react/index.js"
+    },
     "./remix": {
       "browser": "./dist/remix/index.mjs",
       "import": "./dist/remix/index.mjs",
@@ -41,11 +46,6 @@
       "browser": "./dist/vue/index.mjs",
       "import": "./dist/vue/index.mjs",
       "require": "./dist/vue/index.js"
-    },
-    "./react": {
-      "browser": "./dist/react/index.mjs",
-      "import": "./dist/react/index.mjs",
-      "require": "./dist/react/index.js"
     }
   },
   "main": "dist/index.js",
