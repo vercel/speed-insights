@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import type { SpeedInsightsProps } from '../types';
-import { injectSpeedInsights } from '../generic';
+import { computeRoute, injectSpeedInsights } from '../generic';
 
 export function SpeedInsights(
   props: SpeedInsightsProps & {
@@ -25,3 +25,5 @@ export function SpeedInsights(
 
   return null;
 }
+
+export { computeRoute };

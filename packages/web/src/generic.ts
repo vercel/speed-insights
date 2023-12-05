@@ -1,7 +1,7 @@
 import { name as packageName, version } from '../package.json';
 import { initQueue } from './queue';
 import type { SpeedInsightsProps } from './types';
-import { isBrowser, isDevelopment } from './utils';
+import { isBrowser, isDevelopment, computeRoute } from './utils';
 
 const DEV_SCRIPT_URL = `https://va.vercel-scripts.com/v1/speed-insights/script.debug.js`;
 const SCRIPT_URL = `/_vercel/speed-insights/script.js`;
@@ -76,10 +76,11 @@ function injectSpeedInsights(
   };
 }
 
-export { injectSpeedInsights };
+export { injectSpeedInsights, computeRoute };
 export type { SpeedInsightsProps };
 
 // eslint-disable-next-line import/no-default-export -- Allow default export
 export default {
   injectSpeedInsights,
+  computeRoute,
 };
