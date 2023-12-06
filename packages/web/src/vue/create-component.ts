@@ -9,7 +9,7 @@ export function createComponent(
 ): ReturnType<typeof defineComponent> {
   return defineComponent({
     props: [
-      'token',
+      'dsn',
       'sampleRate',
       'beforeSend',
       'debug',
