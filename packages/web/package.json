@@ -1,6 +1,6 @@
 {
   "name": "@vercel/speed-insights",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Speed Insights is a tool for measuring web performance and providing suggestions for improvement.",
   "keywords": [
     "speed-insights",
@@ -10,7 +10,7 @@
     "url": "github:vercel/speed-insights",
     "directory": "packages/web"
   },
-  "license": "MPL-2.0",
+  "license": "Apache-2.0",
   "exports": {
     "./package.json": "./package.json",
     ".": {
