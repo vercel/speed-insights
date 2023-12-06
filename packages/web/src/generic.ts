@@ -33,7 +33,8 @@ function injectSpeedInsights(
 
   const productionScript = isSelfHosted ? PROD_SCRIPT_URL : PROXY_SCRIPT_URL;
 
-  const src = isDevelopment() ? DEV_SCRIPT_URL : productionScript;
+  const src =
+    props.scriptSrc || (isDevelopment() ? DEV_SCRIPT_URL : productionScript);
 
   if (document.head.querySelector(`script[src*="${src}"]`)) return null;
 
