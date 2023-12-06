@@ -9,7 +9,7 @@ export default function RootLayout({
 }): React.ReactNode {
   return (
     <html lang="en">
-      <SpeedInsights token={SPEED_INSIGHTS_ID} />
+      <SpeedInsights />
       <body>{children}</body>
     </html>
   );
