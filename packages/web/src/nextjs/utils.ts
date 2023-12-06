@@ -1,6 +1,6 @@
 'use client';
-import { useParams, usePathname, useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
+import { useParams, usePathname, useSearchParams } from 'next/navigation.js';
 import { computeRoute } from '../utils';
 
 export const useRoute = (): string | null => {
