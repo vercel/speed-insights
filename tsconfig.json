@@ -1,0 +1,9 @@
+{
+  "extends": "@vercel/style-guide/typescript",
+  "compilerOptions": {
+    "sourceMap": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+  }
+}

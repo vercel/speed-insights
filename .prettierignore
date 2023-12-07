@@ -1,0 +1,6 @@
+.next/
+dist/
+.github/
+.nuxt/
+.svelte-kit/
+.vercel/
