@@ -79,8 +79,9 @@
     }
   },
   "scripts": {
-    "build": "tsup && cp -R src/astro dist/astro",
-    "dev": "tsup --watch",
+    "build": "tsup && pnpm copy-astro",
+    "copy-astro": "cp -R src/astro dist/",
+    "dev": "pnpm copy-astro && tsup --watch",
     "postinstall": "node scripts/postinstall.mjs",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",

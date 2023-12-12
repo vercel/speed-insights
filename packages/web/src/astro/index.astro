@@ -25,7 +25,14 @@ const paramsStr = JSON.stringify(Astro.params);
           const props = JSON.parse(this.dataset.props ?? '{}');
           const params = JSON.parse(this.dataset.params ?? '{}');
           const route = computeRoute(this.dataset.pathname ?? '', params);
-          injectSpeedInsights({ route, ...props, framework: 'astro' });
+          injectSpeedInsights({ 
+            route, 
+            ...props, 
+            framework: 'astro',
+            ...(window.speedInsightsBeforeSend ? {
+              beforeSend: window.speedInsightsBeforeSend
+            } : {})
+          });
         } catch (err) {
           throw new Error(`Failed to parse SpeedInsights properties: ${err}`);
         }
