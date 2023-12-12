@@ -29,9 +29,7 @@ const paramsStr = JSON.stringify(Astro.params);
             route, 
             ...props, 
             framework: 'astro',
-            ...(window.speedInsightsBeforeSend ? {
-              beforeSend: window.speedInsightsBeforeSend
-            } : {})
+            beforeSend: window.speedInsightsBeforeSend
           });
         } catch (err) {
           throw new Error(`Failed to parse SpeedInsights properties: ${err}`);
