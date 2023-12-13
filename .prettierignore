@@ -4,3 +4,4 @@ dist/
 .nuxt/
 .svelte-kit/
 .vercel/
+pnpm-lock.yaml

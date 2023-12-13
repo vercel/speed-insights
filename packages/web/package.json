@@ -18,6 +18,9 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
+    "./astro": {
+      "import": "./dist/astro/index.astro"
+    },
     "./next": {
       "browser": "./dist/next/index.mjs",
       "import": "./dist/next/index.mjs",
@@ -76,8 +79,9 @@
     }
   },
   "scripts": {
-    "build": "tsup ",
-    "dev": "tsup --watch",
+    "build": "tsup && pnpm copy-astro",
+    "copy-astro": "cp -R src/astro dist/",
+    "dev": "pnpm copy-astro && tsup --watch",
     "postinstall": "node scripts/postinstall.mjs",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
