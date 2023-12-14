@@ -25,6 +25,7 @@ It has 1st class integration with:
 | Nuxt      | `@vercel/speed-insights/nuxt`      |
 | Sveltekit | `@vercel/speed-insights/sveltekit` |
 | React     | `@vercel/speed-insights/react`     |
+| Astro     | `@vercel/speed-insights/astro`     |
 | Vue       | `@vercel/speed-insights/vue`       |
 
 It also supports other frameworks, vanilla JS and static websites.
