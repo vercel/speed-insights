@@ -1,4 +1,3 @@
-/* eslint-disable no-undef -- Allow the use `process` */
 /* eslint-disable no-console -- Allow the use of `console` */
 import fs from 'node:fs';
 import path from 'node:path';

@@ -20,7 +20,7 @@ const PROXY_SCRIPT_URL = `/_vercel/speed-insights/script.js`;
 function injectSpeedInsights(
   props: SpeedInsightsProps & {
     framework?: string;
-  },
+  } = {},
 ): {
   setRoute: (route: string | null) => void;
 } | null {
