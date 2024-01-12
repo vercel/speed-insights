@@ -1,7 +1,7 @@
 import { computeRoute } from './utils';
 
 describe('utils', () => {
-  describe('computeRoute', () => {
+  describe('computeRoute()', () => {
     it('returns unchanged pathname if no pathParams provided', () => {
       expect(computeRoute('/vercel/next-site/analytics', null)).toBe(
         '/vercel/next-site/analytics',

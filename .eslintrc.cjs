@@ -6,6 +6,7 @@ module.exports = {
     require.resolve('@vercel/style-guide/eslint/jest'),
   ],
   env: {
+    node: true,
     jest: true,
   },
   parserOptions: {

@@ -6,17 +6,18 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "pnpm -F @vercel/speed-insights test"
   },
   "prettier": "@vercel/style-guide/prettier",
   "dependencies": {
     "lint-staged": "^14.0.1"
   },
   "devDependencies": {
-    "@vercel/style-guide": "^5.0.1",
+    "@vercel/style-guide": "^5",
     "husky": "^8.0.3",
     "prettier": "3.0.3",
-    "typescript": "^5.2.2"
+    "typescript": "^5"
   },
   "packageManager": "pnpm@8.6.5"
 }

@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom';
 
 beforeEach(() => {
-  // reset dom before each test
-  document.getElementsByTagName('html')[0].innerHTML = '';
+  if ('document' in global) {
+    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- there is an HTML element */
+    document.querySelector('html')!.innerHTML = '';
+  }
 });
