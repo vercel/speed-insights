@@ -24,6 +24,7 @@ It has 1st class integration with:
 | Next.js   | `@vercel/speed-insights/next`      |
 | Nuxt      | `@vercel/speed-insights/nuxt`      |
 | Sveltekit | `@vercel/speed-insights/sveltekit` |
+| Remix     | `@vercel/speed-insights/remix`     |
 | React     | `@vercel/speed-insights/react`     |
 | Astro     | `@vercel/speed-insights/astro`     |
 | Vue       | `@vercel/speed-insights/vue`       |
