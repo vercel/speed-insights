@@ -14,10 +14,10 @@
     "lint-staged": "^14.0.1"
   },
   "devDependencies": {
-    "@vercel/style-guide": "^5",
+    "@vercel/style-guide": "^5.1.0",
     "husky": "^8.0.3",
-    "prettier": "3.0.3",
-    "typescript": "^5"
+    "prettier": "3.2.2",
+    "typescript": "^5.3.3"
   },
   "packageManager": "pnpm@8.6.5"
 }

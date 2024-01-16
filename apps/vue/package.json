@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@vercel/speed-insights": "workspace:*",
-    "vue": "^3.3.4"
+    "vue": "^3.4.14"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.4.0",
