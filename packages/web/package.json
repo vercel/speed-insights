@@ -1,6 +1,6 @@
 {
   "name": "@vercel/speed-insights",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Speed Insights is a tool for measuring web performance and providing suggestions for improvement.",
   "keywords": [
     "speed-insights",
@@ -19,7 +19,8 @@
       "require": "./dist/index.js"
     },
     "./astro": {
-      "import": "./dist/astro/index.astro"
+      "import": "./dist/astro/index.astro",
+      "types": "./dist/astro/index.astro.tsx"
     },
     "./next": {
       "browser": "./dist/next/index.mjs",

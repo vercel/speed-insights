@@ -39,6 +39,8 @@ declare global {
     siq?: SpeedInsights['queue'];
 
     sil?: boolean;
-    // vam?: Mode;
+
+    /** used by Astro component only */
+    speedInsightsBeforeSend?: BeforeSendMiddleware;
   }
 }
