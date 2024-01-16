@@ -3,7 +3,6 @@
 import type { SpeedInsightsProps } from '../index.d.ts';
 type Props = Omit<SpeedInsightsProps, 'framework' | 'beforeSend'>;
 
-// beforeSend?
 const propsStr = JSON.stringify(Astro.props);
 const paramsStr = JSON.stringify(Astro.params);
 ---
@@ -25,11 +24,11 @@ const paramsStr = JSON.stringify(Astro.params);
           const props = JSON.parse(this.dataset.props ?? '{}');
           const params = JSON.parse(this.dataset.params ?? '{}');
           const route = computeRoute(this.dataset.pathname ?? '', params);
-          injectSpeedInsights({ 
-            route, 
-            ...props, 
+          injectSpeedInsights({
+            route,
+            ...props,
             framework: 'astro',
-            beforeSend: window.speedInsightsBeforeSend
+            beforeSend: window.speedInsightsBeforeSend,
           });
         } catch (err) {
           throw new Error(`Failed to parse SpeedInsights properties: ${err}`);
