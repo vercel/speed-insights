@@ -1,14 +1,16 @@
-import { defineConfig } from 'tsup';
+import { defineConfig, type Options } from 'tsup';
 
-const cfg = {
+const cfg: Options = {
   splitting: false,
   sourcemap: true,
   clean: true,
   treeshake: false,
   dts: true,
+  minify: process.env.NODE_ENV === 'production',
   format: ['esm', 'cjs'],
 };
 
+// eslint-disable-next-line import/no-default-export -- required for tsup
 export default defineConfig([
   {
     ...cfg,
