@@ -137,13 +137,5 @@
     "vue-router": {
       "optional": true
     }
-  },
-  "optionalDependencies": {
-    "@sveltejs/kit": "^1",
-    "next": ">= 13",
-    "react": "^18 || ^19",
-    "svelte": "^4",
-    "vue": "^3",
-    "vue-router": "^4"
   }
 }
