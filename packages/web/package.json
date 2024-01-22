@@ -118,12 +118,24 @@
     "vue": "^3",
     "vue-router": "^4"
   },
-  "optionalDependencies": {
-    "@sveltejs/kit": "^1",
-    "next": ">= 13",
-    "react": "^18 || ^19",
-    "svelte": "^4",
-    "vue": "^3",
-    "vue-router": "^4"
+  "peerDependenciesMeta": {
+    "@sveltejs/kit": {
+      "optional": true
+    },
+    "next": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    },
+    "vue-router": {
+      "optional": true
+    }
   }
 }
