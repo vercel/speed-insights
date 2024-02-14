@@ -6,6 +6,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
+    "build": "pnpm -F @vercel/speed-insights build",
     "prepare": "husky install",
     "test": "pnpm -F @vercel/speed-insights test"
   },
