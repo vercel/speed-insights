@@ -15,5 +15,9 @@
     "@astrojs/sitemap": "^3.0.4",
     "@vercel/speed-insights": "workspace:*",
     "astro": "^4.1.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.5.4",
+    "typescript": "^5.3.3"
   }
 }
