@@ -60,24 +60,30 @@ function isAnalyticsIdInNextConfig() {
 }
 
 function main() {
-  if (!isSpeedInsightsInstalled()) {
-    // No @vercel/speed-insights installed, we don't need to continue
-    return;
-  }
+  try {
+    if (!isSpeedInsightsInstalled()) {
+      // No @vercel/speed-insights installed, we don't need to continue
+      return;
+    }
 
-  const isInConfig = isAnalyticsIdInNextConfig();
-  const envFile = findEnvFileWithAnalyticsId();
+    const isInConfig = isAnalyticsIdInNextConfig();
+    const envFile = findEnvFileWithAnalyticsId();
 
-  if (isInConfig) {
-    console.warn(
-      '\x1b[31m',
-      `Please remove 'analyticsId' from your next.config.js file.`,
-    );
-  }
-  if (envFile) {
-    console.log(
-      '\x1b[31m',
-      `Please remove 'VERCEL_ANALYTICS_ID' from your ${envFile} file.`,
+    if (isInConfig) {
+      console.warn(
+        '\x1b[31m',
+        `Please remove 'analyticsId' from your next.config.js file.`,
+      );
+    }
+    if (envFile) {
+      console.log(
+        '\x1b[31m',
+        `Please remove 'VERCEL_ANALYTICS_ID' from your ${envFile} file.`,
+      );
+    }
+  } catch (error) {
+    console.error(
+      `Failed to run @vercel/speed-insights postinstall script: ${error instanceof Error ? error.message : error}`,
     );
   }
 }
