@@ -5,7 +5,7 @@ import { computeRoute } from '../utils';
 
 export const useRoute = (): string | null => {
   const params = useParams();
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams() || new URLSearchParams();
   const path = usePathname();
 
   const finalParams = {
