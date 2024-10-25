@@ -11,10 +11,11 @@ function SpeedInsightsComponent(props: Props): React.ReactElement {
   return <SpeedInsightsScript route={route} {...props} framework="next" />;
 }
 
-export function SpeedInsights(props: Props): React.ReactElement {
+export function SpeedInsights(props: Props): null {
+  // Because of incompatible types between ReactNode in React 19 and React 18 we return null (which is also what we render)
   return (
     <Suspense fallback={null}>
       <SpeedInsightsComponent {...props} />
     </Suspense>
-  );
+  ) as never;
 }
