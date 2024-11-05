@@ -3,10 +3,10 @@ import { initQueue } from './queue';
 import type { SpeedInsightsProps } from './types';
 import { isBrowser, isDevelopment, computeRoute } from './utils';
 
-const SCRIPT_URL = `https://va.vercel-scripts.com/v1/speed-insights`;
+const SCRIPT_URL = 'https://va.vercel-scripts.com/v1/speed-insights';
 const PROD_SCRIPT_URL = `${SCRIPT_URL}/script.js`;
 const DEV_SCRIPT_URL = `${SCRIPT_URL}/script.debug.js`;
-const PROXY_SCRIPT_URL = `/_vercel/speed-insights/script.js`;
+const PROXY_SCRIPT_URL = '/_vercel/speed-insights/script.js';
 
 /**
  * Injects the Vercel Speed Insights script into the page head and starts tracking page views. Read more in our [documentation](https://vercel.com/docs/speed-insights).

@@ -1,7 +1,8 @@
-export default function Blog({
-  params: { slug },
+export default async function Blog({
+  params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   return <div>My blog page {slug}</div>;
 }
