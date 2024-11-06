@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable @typescript-eslint/no-unnecessary-condition -- can be empty in pages router */
 import { useParams, usePathname, useSearchParams } from 'next/navigation.js';
 import { computeRoute } from '../utils';
 
