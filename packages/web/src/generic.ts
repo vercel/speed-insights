@@ -57,6 +57,8 @@ function injectSpeedInsights(
   }
   if (props.endpoint) {
     script.dataset.endpoint = props.endpoint;
+  } else if (process.env.ENDPOINT_PATH_PREFIX) {
+    script.dataset.endpoint = `/${process.env.ENDPOINT_PATH_PREFIX}/_vercel/speed-insights/vitals`;
   }
   if (props.dsn) {
     script.dataset.dsn = props.dsn;
