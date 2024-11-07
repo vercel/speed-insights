@@ -8,6 +8,10 @@ export function SpeedInsights(
     framework?: string;
   },
 ): JSX.Element | null {
+  useEffect(() => {
+    window.si?.('beforeSend', props.beforeSend);
+  }, [props.beforeSend]);
+
   const setScriptRoute = useRef<((path: string) => void) | null>(null);
   useEffect(() => {
     if (!setScriptRoute.current) {

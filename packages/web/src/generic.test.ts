@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
-import { injectSpeedInsights } from './generic';
+import { injectSpeedInsights, type SpeedInsightsProps } from './generic';
 
 describe('injectSpeedInsights()', () => {
   it('allows no parameters', () => {
@@ -15,6 +15,15 @@ describe('injectSpeedInsights()', () => {
       setRoute: expect.any(Function),
     });
     expectInjectedScript({ framework });
+  });
+
+  it('can set beforeSend', () => {
+    const beforeSend: Required<SpeedInsightsProps>['beforeSend'] = (event) =>
+      event;
+    injectSpeedInsights({ beforeSend });
+
+    expect(window.siq?.[0]).toEqual(['beforeSend', beforeSend]);
+    expect(window.siq).toHaveLength(1);
   });
 });
 

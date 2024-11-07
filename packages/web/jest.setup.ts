@@ -1,8 +1,13 @@
+import { beforeEach } from '@jest/globals';
 import '@testing-library/jest-dom';
+// Adds helpers like `.toHaveAttribute`
+import '@testing-library/jest-dom/jest-globals';
 
 beforeEach(() => {
   if ('document' in global) {
-    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- there is an HTML element */
-    document.querySelector('html')!.innerHTML = '';
+    const html = document.querySelector('html');
+    if (html) {
+      html.innerHTML = '';
+    }
   }
 });
