@@ -60,5 +60,18 @@ describe('<SpeedInsights />', () => {
       expect(window.siq?.[0]).toEqual(['beforeSend', beforeSend2]);
       expect(window.siq).toHaveLength(1);
     });
+
+    it('does not change beforeSend when undefined', () => {
+      const beforeSend: Required<SpeedInsightsProps>['beforeSend'] = (event) =>
+        event;
+      const { rerender } = render(<SpeedInsights beforeSend={beforeSend} />);
+
+      expect(window.siq?.[0]).toEqual(['beforeSend', beforeSend]);
+      expect(window.siq).toHaveLength(1);
+      window.siq?.splice(0, 1);
+
+      rerender(<SpeedInsights />);
+      expect(window.siq).toHaveLength(0);
+    });
   });
 });
