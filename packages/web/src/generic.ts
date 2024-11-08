@@ -57,8 +57,8 @@ function injectSpeedInsights(
   }
   if (props.endpoint) {
     script.dataset.endpoint = props.endpoint;
-  } else if (process.env.ENDPOINT_PATH_PREFIX) {
-    script.dataset.endpoint = `/${process.env.NEXT_PUBLIC_ENDPOINT_PATH_PREFIX}/_vercel/speed-insights/vitals`;
+  } else if (process.env.NEXT_PUBLIC_SPEED_INSIGHTS_ENDPOINT_PATH_PREFIX) {
+    script.dataset.endpoint = `/${process.env.NEXT_PUBLIC_SPEED_INSIGHTS_ENDPOINT_PATH_PREFIX}/_vercel/speed-insights/vitals`;
   }
   if (props.dsn) {
     script.dataset.dsn = props.dsn;
