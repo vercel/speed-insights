@@ -58,8 +58,11 @@ function injectSpeedInsights(
   }
   if (props.endpoint) {
     script.dataset.endpoint = props.endpoint;
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- process doesn't exist in all frameworks
-  } else if (process?.env?.[basepathVariableName]) {
+    // eslint-disable-next-line @typescript-eslint/prefer-optional-chain, @typescript-eslint/no-unnecessary-condition -- process doesn't exist in all frameworks
+  } else if (
+    typeof process !== 'undefined' &&
+    process.env?.[basepathVariableName]
+  ) {
     script.dataset.endpoint = `/${process.env[basepathVariableName]}/_vercel/speed-insights/vitals`;
   }
   if (props.dsn) {
