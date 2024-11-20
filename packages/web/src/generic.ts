@@ -7,7 +7,6 @@ const SCRIPT_URL = 'https://va.vercel-scripts.com/v1/speed-insights';
 const PROD_SCRIPT_URL = `${SCRIPT_URL}/script.js`;
 const DEV_SCRIPT_URL = `${SCRIPT_URL}/script.debug.js`;
 const PROXY_SCRIPT_URL = '/_vercel/speed-insights/script.js';
-const basepathVariableName = 'NEXT_PUBLIC_SPEED_INSIGHTS_BASEPATH';
 
 /**
  * Injects the Vercel Speed Insights script into the page head and starts tracking page views. Read more in our [documentation](https://vercel.com/docs/speed-insights).
@@ -62,9 +61,9 @@ function injectSpeedInsights(
     // eslint-disable-next-line @typescript-eslint/prefer-optional-chain -- process doesn't exist in all frameworks
     typeof process !== 'undefined' &&
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- process doesn't exist in all frameworks
-    process.env?.[basepathVariableName]
+    process.env?.NEXT_PUBLIC_SPEED_INSIGHTS_BASEPATH
   ) {
-    script.dataset.endpoint = `/${process.env[basepathVariableName]}/_vercel/speed-insights/vitals`;
+    script.dataset.endpoint = `/${process.env.NEXT_PUBLIC_SPEED_INSIGHTS_BASEPATH}/_vercel/speed-insights/vitals`;
   }
   if (props.dsn) {
     script.dataset.dsn = props.dsn;
