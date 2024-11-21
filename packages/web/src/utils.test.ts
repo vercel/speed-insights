@@ -1,5 +1,5 @@
-import { describe, it, expect } from '@jest/globals';
-import { computeRoute } from './utils';
+import { afterEach, describe, it, expect } from 'vitest';
+import { computeRoute, getBasePath, getScriptSrc } from './utils';
 
 describe('utils', () => {
   describe('computeRoute()', () => {
@@ -114,6 +114,118 @@ describe('utils', () => {
         const expected = '/[project]/[teamSlug]'; // 'project' takes priority over 'teamSlug' here due to the reversed order in the params object
         expect(computeRoute(input, params)).toBe(expected);
       });
+    });
+  });
+
+  describe('getBasePath()', () => {
+    const processSave = { ...process };
+    const envSave = { ...process.env };
+
+    afterEach(() => {
+      global.process = { ...processSave };
+      process.env = { ...envSave };
+    });
+
+    it('returns null without process', () => {
+      // @ts-expect-error -- yes, we want to completely drop process for this test!!
+      global.process = undefined;
+      expect(getBasePath()).toBe(null);
+    });
+
+    it('returns null without process.env', () => {
+      // @ts-expect-error -- yes, we want to completely drop process.env for this test!!
+      process.env = undefined;
+      expect(getBasePath()).toBe(null);
+    });
+
+    it('returns basepath set for Nextjs', () => {
+      const basepath = `/_vercel-${Math.random()}/insights`;
+      process.env.NEXT_PUBLIC_VERCEL_OBSERVABILITY_BASEPATH = basepath;
+      expect(getBasePath()).toBe(basepath);
+    });
+
+    it('returns basepath set for Sveltekit, Nuxt, Vue, Remix', () => {
+      const basepath = `/_vercel-${Math.random()}/insights`;
+      import.meta.env.VITE_VERCEL_OBSERVABILITY_BASEPATH = basepath;
+      expect(getBasePath()).toBe(basepath);
+    });
+
+    it('returns basepath set for Astro', () => {
+      const basepath = `/_vercel-${Math.random()}/insights`;
+      import.meta.env.PUBLIC_VERCEL_OBSERVABILITY_BASEPATH = basepath;
+      expect(getBasePath()).toBe(basepath);
+    });
+
+    it('returns basepath set for CRA', () => {
+      const basepath = `/_vercel-${Math.random()}/insights`;
+      process.env.REACT_APP_VERCEL_OBSERVABILITY_BASEPATH = basepath;
+      expect(getBasePath()).toBe(basepath);
+    });
+
+    it('returns null without import.meta', () => {
+      // @ts-expect-error -- yes, we want to completely drop import.meta.env for this test!!
+      import.meta.env = undefined;
+      expect(getBasePath()).toBe(null);
+    });
+  });
+
+  describe('getScriptSrc()', () => {
+    const envSave = { ...process.env };
+
+    afterEach(() => {
+      process.env = { ...envSave };
+    });
+
+    it('returns debug script in development', () => {
+      process.env.NODE_ENV = 'development';
+      expect(getScriptSrc({})).toBe(
+        'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js',
+      );
+    });
+
+    it('returns the specified prop in development', () => {
+      process.env.NODE_ENV = 'development';
+      const scriptSrc = `https://example.com/${Math.random()}/script.js`;
+      expect(getScriptSrc({ scriptSrc })).toBe(scriptSrc);
+    });
+
+    it('returns generic route in production', () => {
+      process.env.NODE_ENV = 'production';
+      expect(getScriptSrc({})).toBe('/_vercel/speed-insights/script.js');
+    });
+
+    it('returns absolute route in production when using dsn', () => {
+      process.env.NODE_ENV = 'production';
+      expect(getScriptSrc({ dsn: 'test' })).toBe(
+        'https://va.vercel-scripts.com/v1/speed-insights/script.js',
+      );
+    });
+
+    it('returns base path in production', () => {
+      process.env.NODE_ENV = 'production';
+      const basepath = `/_vercel-${Math.random()}`;
+      process.env.NEXT_PUBLIC_VERCEL_OBSERVABILITY_BASEPATH = basepath;
+      expect(getScriptSrc({})).toBe(`${basepath}/speed-insights/script.js`);
+    });
+
+    it('ignores basepath when using dsn and bas', () => {
+      process.env.NODE_ENV = 'production';
+      process.env.NEXT_PUBLIC_VERCEL_OBSERVABILITY_BASEPATH = `/_vercel-${Math.random()}`;
+      expect(getScriptSrc({ dsn: 'test' })).toBe(
+        'https://va.vercel-scripts.com/v1/speed-insights/script.js',
+      );
+    });
+
+    it('returns the specified prop in production', () => {
+      process.env.NODE_ENV = 'production';
+      const scriptSrc = `https://example.com/${Math.random()}/script.js`;
+      expect(getScriptSrc({ scriptSrc })).toBe(scriptSrc);
+    });
+
+    it('returns the specified prop in production when using dsn', () => {
+      process.env.NODE_ENV = 'production';
+      const scriptSrc = `https://example.com/${Math.random()}/script.js`;
+      expect(getScriptSrc({ scriptSrc, dsn: 'test' })).toBe(scriptSrc);
     });
   });
 });

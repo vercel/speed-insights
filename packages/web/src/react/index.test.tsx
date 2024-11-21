@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { afterEach, beforeEach, describe, it, expect } from '@jest/globals';
+import { afterEach, beforeEach, describe, it, expect } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
 import type { SpeedInsightsProps } from '../types';
 import { SpeedInsights } from '.';
@@ -16,7 +16,7 @@ describe('<SpeedInsights />', () => {
     },
     {
       mode: 'production',
-      file: 'http://localhost/_vercel/speed-insights/script.js',
+      file: 'http://localhost:3000/_vercel/speed-insights/script.js',
     },
   ])('in $mode mode', ({ mode, file }) => {
     const env = process.env.NODE_ENV;

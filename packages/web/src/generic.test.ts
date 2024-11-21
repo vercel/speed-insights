@@ -1,10 +1,10 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import { injectSpeedInsights, type SpeedInsightsProps } from './generic';
 
 describe('injectSpeedInsights()', () => {
   it('allows no parameters', () => {
     expect(injectSpeedInsights()).toEqual({
-      setRoute: expect.any(Function),
+      setRoute: expect.any(Function) as unknown,
     });
     expectInjectedScript();
   });
@@ -12,7 +12,7 @@ describe('injectSpeedInsights()', () => {
   it('can set framework', () => {
     const framework = 'sveltekit';
     expect(injectSpeedInsights({ framework })).toEqual({
-      setRoute: expect.any(Function),
+      setRoute: expect.any(Function) as unknown,
     });
     expectInjectedScript({ framework });
   });
