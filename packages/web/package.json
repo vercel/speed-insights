@@ -1,6 +1,6 @@
 {
   "name": "@vercel/speed-insights",
-  "version": "1.2.0-canary.2",
+  "version": "1.2.0-canary.3",
   "description": "Speed Insights is a tool for measuring web performance and providing suggestions for improvement.",
   "keywords": [
     "speed-insights",

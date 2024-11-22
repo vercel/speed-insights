@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useRef } from 'react';
 import type { SpeedInsightsProps } from '../types';
 import { computeRoute, injectSpeedInsights } from '../generic';
