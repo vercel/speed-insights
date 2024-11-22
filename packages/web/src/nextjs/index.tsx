@@ -1,3 +1,5 @@
+'use client';
+
 import React, { Suspense } from 'react';
 import { SpeedInsights as SpeedInsightsScript } from '../react';
 import type { SpeedInsightsProps } from '../types';
