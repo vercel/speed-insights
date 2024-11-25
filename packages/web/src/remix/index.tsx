@@ -1,7 +1,7 @@
 import React from 'react';
 import { SpeedInsights as SpeedInsightsScript } from '../react';
 import type { SpeedInsightsProps } from '../types';
-import { useRoute } from './utils';
+import { getBasePath, useRoute } from './utils';
 
 export function SpeedInsights(
   props: Omit<SpeedInsightsProps, 'route'>,
@@ -10,9 +10,10 @@ export function SpeedInsights(
 
   return (
     <SpeedInsightsScript
-      {...(route && { route })}
+      route={route}
       {...props}
       framework="remix"
+      basePath={getBasePath()}
     />
   );
 }
