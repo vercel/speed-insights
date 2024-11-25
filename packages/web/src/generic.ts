@@ -1,13 +1,7 @@
 import { name as packageName, version } from '../package.json';
 import { initQueue } from './queue';
 import type { SpeedInsightsProps } from './types';
-import {
-  computeRoute,
-  getBasePath,
-  getScriptSrc,
-  isBrowser,
-  isDevelopment,
-} from './utils';
+import { computeRoute, getScriptSrc, isBrowser, isDevelopment } from './utils';
 
 /**
  * Injects the Vercel Speed Insights script into the page head and starts tracking page views. Read more in our [documentation](https://vercel.com/docs/speed-insights).
@@ -21,6 +15,7 @@ import {
 function injectSpeedInsights(
   props: SpeedInsightsProps & {
     framework?: string;
+    basePath?: string;
   } = {},
 ): {
   setRoute: (route: string | null) => void;
@@ -51,11 +46,10 @@ function injectSpeedInsights(
   if (props.route) {
     script.dataset.route = props.route;
   }
-  const basePath = getBasePath();
   if (props.endpoint) {
     script.dataset.endpoint = props.endpoint;
-  } else if (basePath) {
-    script.dataset.endpoint = `${basePath}/speed-insights/vitals`;
+  } else if (props.basePath) {
+    script.dataset.endpoint = `${props.basePath}/speed-insights/vitals`;
   }
   if (props.dsn) {
     script.dataset.dsn = props.dsn;
