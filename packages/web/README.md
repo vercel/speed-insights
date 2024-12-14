@@ -19,15 +19,16 @@ This package does **not** track data in development mode.
 
 It has 1st class integration with:
 
-| Framework | Package                            |
-| --------- | ---------------------------------- |
-| Next.js   | `@vercel/speed-insights/next`      |
-| Nuxt      | `@vercel/speed-insights/nuxt`      |
-| Sveltekit | `@vercel/speed-insights/sveltekit` |
-| Remix     | `@vercel/speed-insights/remix`     |
-| React     | `@vercel/speed-insights/react`     |
-| Astro     | `@vercel/speed-insights/astro`     |
-| Vue       | `@vercel/speed-insights/vue`       |
+| Framework    | Package                               |
+| ------------ | ------------------------------------- |
+| Next.js      | `@vercel/speed-insights/next`         |
+| Nuxt         | `@vercel/speed-insights/nuxt`         |
+| Sveltekit    | `@vercel/speed-insights/sveltekit`    |
+| Remix        | `@vercel/speed-insights/remix`        |
+| React        | `@vercel/speed-insights/react`        |
+| React Router | `@vercel/speed-insights/react-router` |
+| Astro        | `@vercel/speed-insights/astro`        |
+| Vue          | `@vercel/speed-insights/vue`          |
 
 It also supports other frameworks, vanilla JS and static websites.
 
@@ -37,7 +38,7 @@ It also supports other frameworks, vanilla JS and static websites.
 2. Add the `@vercel/speed-insights` package to your project
 3. Inject Speed Insights to your app
 
-   - If you are using **Next.js**, **React**, **Nuxt** or **Vue** you can use the framework-specific `<SpeedInsights />` component to inject the script into your app.
+   - If you are using **Next.js**, **React**, **Remix**, **React Router**, **Nuxt** or **Vue** you can use the framework-specific `<SpeedInsights />` component to inject the script into your app.
    - If you are using **Sveltekit**, you can use the `injectSpeedInsights()` function `@vercel/speed-insights/sveltekit` in your top-level `+layout.js/ts` file.
    - For other frameworks, you can use the `inject` function add the tracking script to your app.
    - If you want to use Vercel Speed Insights on a static site without npm, follow the instructions in the [documentation](https://vercel.com/docs/speed-insights/quickstart).

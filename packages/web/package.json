@@ -41,6 +41,11 @@
       "import": "./dist/remix/index.mjs",
       "require": "./dist/remix/index.js"
     },
+    "./react-router": {
+      "browser": "./dist/react-router/index.mjs",
+      "import": "./dist/react-router/index.mjs",
+      "require": "./dist/react-router/index.js"
+    },
     "./sveltekit": {
       "svelte": "./dist/sveltekit/index.mjs",
       "types": "./dist/sveltekit/index.d.ts"
@@ -69,6 +74,9 @@
       ],
       "remix": [
         "dist/remix/index.d.ts"
+      ],
+      "react-router": [
+        "dist/react-router/index.d.ts"
       ],
       "sveltekit": [
         "dist/sveltekit/index.d.ts"
@@ -104,6 +112,7 @@
     "next": "^14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router": "^7.0.2",
     "svelte": "^5",
     "tsup": "7.2.0",
     "vue": "^3.4.14",
@@ -113,6 +122,7 @@
     "@sveltejs/kit": "^1 || ^2",
     "next": ">= 13",
     "react": "^18 || ^19 || ^19.0.0-rc",
+    "react-router": "^7",
     "svelte": ">= 4",
     "vue": "^3",
     "vue-router": "^4"
@@ -125,6 +135,9 @@
       "optional": true
     },
     "react": {
+      "optional": true
+    },
+    "react-router": {
       "optional": true
     },
     "svelte": {
