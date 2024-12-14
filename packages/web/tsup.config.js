@@ -50,6 +50,14 @@ export default defineConfig([
   {
     ...cfg,
     entry: {
+      index: 'src/react-router/index.tsx',
+    },
+    external: ['react', 'react-router'],
+    outDir: 'dist/react-router',
+  },
+  {
+    ...cfg,
+    entry: {
       index: 'src/sveltekit/index.ts',
     },
     external: ['svelte', '@sveltejs/kit', '$app'],
