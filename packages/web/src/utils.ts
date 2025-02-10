@@ -1,3 +1,5 @@
+import type { SpeedInsightsProps } from './types';
+
 export function isBrowser(): boolean {
   return typeof window !== 'undefined';
 }
@@ -63,4 +65,22 @@ function turnValueToRegExp(value: string): RegExp {
 
 function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+export function getScriptSrc(
+  props: SpeedInsightsProps & { basePath?: string },
+): string {
+  if (props.scriptSrc) {
+    return props.scriptSrc;
+  }
+  if (isDevelopment()) {
+    return 'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js';
+  }
+  if (props.dsn) {
+    return 'https://va.vercel-scripts.com/v1/speed-insights/script.js';
+  }
+  if (props.basePath) {
+    return `${props.basePath}/speed-insights/script.js`;
+  }
+  return '/_vercel/speed-insights/script.js';
 }

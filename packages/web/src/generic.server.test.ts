@@ -1,5 +1,5 @@
-/** @jest-environment node */
-import { describe, it, expect } from '@jest/globals';
+// @vitest-environment node
+import { describe, it, expect } from 'vitest';
 import { injectSpeedInsights } from './generic';
 
 describe('injectSpeedInsights()', () => {

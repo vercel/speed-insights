@@ -1,13 +1,7 @@
 import { name as packageName, version } from '../package.json';
 import { initQueue } from './queue';
 import type { SpeedInsightsProps } from './types';
-import { isBrowser, isDevelopment, computeRoute } from './utils';
-
-const SCRIPT_URL = 'https://va.vercel-scripts.com/v1/speed-insights';
-const PROD_SCRIPT_URL = `${SCRIPT_URL}/script.js`;
-const DEV_SCRIPT_URL = `${SCRIPT_URL}/script.debug.js`;
-const PROXY_SCRIPT_URL = '/_vercel/speed-insights/script.js';
-const basepathVariableName = 'NEXT_PUBLIC_SPEED_INSIGHTS_BASEPATH';
+import { computeRoute, getScriptSrc, isBrowser, isDevelopment } from './utils';
 
 /**
  * Injects the Vercel Speed Insights script into the page head and starts tracking page views. Read more in our [documentation](https://vercel.com/docs/speed-insights).
@@ -21,6 +15,7 @@ const basepathVariableName = 'NEXT_PUBLIC_SPEED_INSIGHTS_BASEPATH';
 function injectSpeedInsights(
   props: SpeedInsightsProps & {
     framework?: string;
+    basePath?: string;
   } = {},
 ): {
   setRoute: (route: string | null) => void;
@@ -30,12 +25,7 @@ function injectSpeedInsights(
 
   initQueue();
 
-  const isSelfHosted = Boolean(props.dsn);
-
-  const productionScript = isSelfHosted ? PROD_SCRIPT_URL : PROXY_SCRIPT_URL;
-
-  const src =
-    props.scriptSrc || (isDevelopment() ? DEV_SCRIPT_URL : productionScript);
+  const src = getScriptSrc(props);
 
   if (document.head.querySelector(`script[src*="${src}"]`)) return null;
 
@@ -58,8 +48,8 @@ function injectSpeedInsights(
   }
   if (props.endpoint) {
     script.dataset.endpoint = props.endpoint;
-  } else if (process.env[basepathVariableName]) {
-    script.dataset.endpoint = `/${process.env[basepathVariableName]}/_vercel/speed-insights/vitals`;
+  } else if (props.basePath) {
+    script.dataset.endpoint = `${props.basePath}/speed-insights/vitals`;
   }
   if (props.dsn) {
     script.dataset.dsn = props.dsn;

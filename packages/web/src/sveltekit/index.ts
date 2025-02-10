@@ -3,6 +3,7 @@ import {
   injectSpeedInsights as genericInject,
   type SpeedInsightsProps,
 } from '../generic';
+import { getBasePath } from './utils';
 import { page } from '$app/stores';
 import { browser } from '$app/environment';
 import type {} from '@sveltejs/kit'; // don't remove, ensures ambient types for $app/* are loaded
@@ -16,6 +17,7 @@ export function injectSpeedInsights(
       route: get(page).route?.id,
       ...props,
       framework: 'sveltekit',
+      basePath: getBasePath(),
     });
 
     if (speedInsights) {

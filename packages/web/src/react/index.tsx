@@ -1,11 +1,14 @@
 'use client';
+
 import { useEffect, useRef } from 'react';
 import type { SpeedInsightsProps } from '../types';
 import { computeRoute, injectSpeedInsights } from '../generic';
+import { getBasePath } from './utils';
 
 export function SpeedInsights(
   props: SpeedInsightsProps & {
     framework?: string;
+    basePath?: string;
   },
 ): JSX.Element | null {
   useEffect(() => {
@@ -18,7 +21,8 @@ export function SpeedInsights(
   useEffect(() => {
     if (!setScriptRoute.current) {
       const script = injectSpeedInsights({
-        framework: props.framework || 'react',
+        framework: props.framework ?? 'react',
+        basePath: props.basePath ?? getBasePath(),
         ...props,
       });
       if (script) {
