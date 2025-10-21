@@ -14,6 +14,7 @@ export type EventTypes = 'vital';
 export interface Event {
   type: EventTypes;
   url: string;
+  route?: string;
 }
 
 export type BeforeSendMiddleware = (
