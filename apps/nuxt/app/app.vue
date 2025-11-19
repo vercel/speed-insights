@@ -1,7 +1,7 @@
 <script setup lang="ts">
-// import { Analytics, type BeforeSendEvent } from '@vercel/speed-insights/nuxt';
+// import { SpeedInsights, type BeforeSendMiddleware } from '@vercel/speed-insights/nuxt';
 
-// const beforeSend = (event: BeforeSendEvent) => {
+// const beforeSend = (event: BeforeSendMiddleware) => {
 //   console.log('Sending event:', event);
 //   return event;
 // };

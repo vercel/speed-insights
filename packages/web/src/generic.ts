@@ -1,6 +1,6 @@
 import { name as packageName, version } from '../package.json';
 import { initQueue } from './queue';
-import type { SpeedInsightsProps } from './types';
+import type { SpeedInsightsProps, BeforeSendMiddleware } from './types';
 import { computeRoute, getScriptSrc, isBrowser, isDevelopment } from './utils';
 
 /**
@@ -75,7 +75,7 @@ function injectSpeedInsights(
 }
 
 export { injectSpeedInsights, computeRoute };
-export type { SpeedInsightsProps };
+export type { SpeedInsightsProps, BeforeSendMiddleware };
 
 // eslint-disable-next-line import/no-default-export -- Allow default export
 export default {
