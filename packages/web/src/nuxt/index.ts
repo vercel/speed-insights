@@ -1,5 +1,5 @@
 import { useRoute, useNuxtApp } from 'nuxt/app';
-import type { SpeedInsightsProps, BeforeSendMiddleware } from '../types';
+import type { SpeedInsightsProps } from '../types';
 import { createComponent } from '../vue/create-component';
 import { injectSpeedInsights as genericInjectSpeedInsights } from '../generic';
 import { isBrowser } from '../utils';
@@ -14,9 +14,7 @@ function injectSpeedInsights(
   props: Omit<SpeedInsightsProps, 'framework'> = {},
 ): void {
   if (isBrowser()) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks -- we are not using a React here
     const nuxtApp = useNuxtApp();
-    // eslint-disable-next-line react-hooks/rules-of-hooks -- we are not using a React here
     const route = useRoute();
 
     const speedInsights = genericInjectSpeedInsights({
