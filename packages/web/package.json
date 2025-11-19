@@ -31,6 +31,11 @@
       "import": "./dist/nuxt/index.mjs",
       "require": "./dist/nuxt/index.js"
     },
+    "./nuxt/module": {
+      "browser": "./dist/nuxt/module.mjs",
+      "import": "./dist/nuxt/module.mjs",
+      "require": "./dist/nuxt/module.js"
+    },
     "./react": {
       "browser": "./dist/react/index.mjs",
       "import": "./dist/react/index.mjs",
@@ -89,6 +94,8 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@nuxt/kit": "^4.2.0",
+    "@nuxt/schema": "^4.2.0",
     "@remix-run/react": "^2.14.0",
     "@sveltejs/kit": "^2.8.1",
     "@swc/core": "^1.9.2",
@@ -110,6 +117,7 @@
   "peerDependencies": {
     "@sveltejs/kit": "^1 || ^2",
     "next": ">= 13",
+    "nuxt": ">= 3",
     "react": "^18 || ^19 || ^19.0.0-rc",
     "svelte": ">= 4",
     "vue": "^3",
