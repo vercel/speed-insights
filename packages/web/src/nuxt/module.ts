@@ -5,7 +5,7 @@ import type { NuxtModule } from '@nuxt/schema';
 export default defineNuxtModule({
   meta: {
     name: '@vercel/speed-insights',
-    configKey: 'speed-insights',
+    configKey: 'speedInsights',
     docs: 'https://vercel.com/docs/speed-insights/quickstart',
   },
   setup() {
