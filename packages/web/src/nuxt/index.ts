@@ -5,7 +5,7 @@ import {
   injectSpeedInsights as genericInjectSpeedInsights,
   type BeforeSendMiddleware,
 } from '../generic';
-import { isBrowser } from '../utils';
+import { isBrowser, computeRoute } from '../utils';
 import { getBasePath } from './utils';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- vue's defineComponent return type is any
@@ -22,7 +22,7 @@ function injectSpeedInsights(
 
     const speedInsights = genericInjectSpeedInsights({
       ...props,
-      route: route.matched[0]?.path || route.path,
+      route: computeRoute(route, route.params),
       framework: 'nuxt',
       basePath: getBasePath(),
     });
