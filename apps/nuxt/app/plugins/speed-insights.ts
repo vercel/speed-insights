@@ -1,5 +1,5 @@
 /**
- * Enable only when disabling the module in nuxt.config.ts
+ * Uncomment only when disabling the module in nuxt.config.ts
  */
 // import { injectSpeedInsights } from "@vercel/speed-insights/nuxt"
 
