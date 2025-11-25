@@ -1,4 +1,4 @@
-import { useRoute, useNuxtApp } from 'nuxt/app';
+import { useRoute, useRouter } from 'nuxt/app';
 import type { SpeedInsightsProps } from '../types';
 import { createComponent } from '../vue/create-component';
 import {
@@ -17,7 +17,7 @@ function injectSpeedInsights(
   props: Omit<SpeedInsightsProps, 'framework'> = {},
 ): void {
   if (isBrowser()) {
-    const nuxtApp = useNuxtApp();
+    const router = useRouter();
     const route = useRoute();
 
     const speedInsights = genericInjectSpeedInsights({
@@ -27,8 +27,8 @@ function injectSpeedInsights(
       basePath: getBasePath(),
     });
     // On navigation to a new page
-    nuxtApp.hooks.hook('page:finish', () => {
-      speedInsights?.setRoute(route.matched[0]?.path || route.path);
+    router.afterEach((to) => {
+      speedInsights?.setRoute(computeRoute(to.path, to.params));
     });
   }
 }
