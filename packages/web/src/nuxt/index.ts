@@ -22,7 +22,7 @@ function injectSpeedInsights(
 
     const speedInsights = genericInjectSpeedInsights({
       ...props,
-      route: computeRoute(route, route.params),
+      route: computeRoute(route.path, route.params),
       framework: 'nuxt',
       basePath: getBasePath(),
     });
