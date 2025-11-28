@@ -47,8 +47,8 @@
       "require": "./dist/remix/index.js"
     },
     "./sveltekit": {
-      "svelte": "./dist/sveltekit/index.mjs",
-      "types": "./dist/sveltekit/index.d.ts"
+      "types": "./dist/sveltekit/index.d.ts",
+      "svelte": "./dist/sveltekit/index.mjs"
     },
     "./vue": {
       "browser": "./dist/vue/index.mjs",
