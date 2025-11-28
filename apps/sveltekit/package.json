@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-vercel": "^5.4",
-    "@sveltejs/kit": "^2.7",
+    "@sveltejs/kit": "^2.49",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@vercel/speed-insights": "workspace:*",
     "svelte": "^5",
