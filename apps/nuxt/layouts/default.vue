@@ -1,6 +1,18 @@
+<script setup lang="ts">
+import { SpeedInsights } from '@vercel/speed-insights/nuxt';
+</script>
+
 <template>
+  <SpeedInsights />
   <header>
-    <img alt="Nuxt logo" class="logo" src="@/assets/logo.svg" width="180" />
+    <img
+      alt="Vue logo"
+      class="logo"
+      src="@/assets/logo.svg"
+      width="125"
+      height="125"
+    />
+
     <div class="wrapper">
       <nav>
         <NuxtLink to="/">Home</NuxtLink>
@@ -8,8 +20,8 @@
         <NuxtLink to="/blog/various/hallo">Hallo!</NuxtLink>
       </nav>
     </div>
-    <slot />
   </header>
+  <slot />
 </template>
 
 <style>
@@ -18,12 +30,11 @@
 header {
   line-height: 1.5;
   max-height: 100vh;
-  text-align: center;
 }
 
 .logo {
   display: block;
-  margin: 2rem auto 2rem;
+  margin: 0 auto 2rem;
 }
 
 nav {
