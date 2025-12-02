@@ -6,12 +6,14 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "postinstall": "nuxt prepare",
     "preview": "nuxt preview"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
     "@vercel/speed-insights": "workspace:*",
-    "nuxt": "^4.2.0",
-    "vue": "latest",
-    "vue-router": "latest"
+    "nuxt": "^3.9.1",
+    "vue": "^3.4.14",
+    "vue-router": "^4.2.5"
   }
 }
