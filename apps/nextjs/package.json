@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@vercel/speed-insights": "workspace:*",
-    "next": "latest",
+    "next": "16.0.7",
     "react": "latest",
     "react-dom": "latest"
   },
