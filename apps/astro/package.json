@@ -10,14 +10,14 @@
     "start": "astro dev"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.0.4",
-    "@astrojs/rss": "^4.0.2",
-    "@astrojs/sitemap": "^3.0.4",
+    "@astrojs/mdx": "^4.3.12",
+    "@astrojs/rss": "^4.0.14",
+    "@astrojs/sitemap": "^3.6.0",
     "@vercel/speed-insights": "workspace:*",
-    "astro": "^4.1.2"
+    "astro": "^5.16.4"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.5.4",
+    "@astrojs/check": "^0.9.6",
     "typescript": "^5.3.3"
   }
 }
