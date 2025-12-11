@@ -30,10 +30,6 @@
       "import": "./dist/nuxt/index.mjs",
       "require": "./dist/nuxt/index.js"
     },
-    "./nuxt/module": {
-      "import": "./dist/nuxt/index.mjs",
-      "require": "./dist/nuxt/index.js"
-    },
     "./nuxt/runtime": {
       "browser": "./dist/nuxt/runtime/index.mjs",
       "import": "./dist/nuxt/runtime/index.mjs",
