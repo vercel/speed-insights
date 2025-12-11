@@ -4,7 +4,7 @@
  * As well as using the deprected <SpeedInsights> component
  * We recommend using the module or the injectSpeedInsights function in a Nuxt plugin
  */
-// import { SpeedInsights, type BeforeSendMiddleware } from '@vercel/speed-insights/nuxt';
+// import { SpeedInsights, type BeforeSendMiddleware } from '@vercel/speed-insights/nuxt/runtime';
 
 // const beforeSend = (event: BeforeSendMiddleware) => {
 //   console.log('Sending event:', event);
