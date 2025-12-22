@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/vercel/speed-insights.git"
   },
-  "license": "Apache-2.0",
+  "license": "MIT",
   "scripts": {
     "build": "pnpm -F @vercel/speed-insights build",
     "prepare": "husky install",
