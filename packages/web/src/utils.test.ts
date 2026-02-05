@@ -1,4 +1,4 @@
-import { afterEach, describe, it, expect } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { computeRoute, getScriptSrc } from './utils';
 
 describe('utils', () => {

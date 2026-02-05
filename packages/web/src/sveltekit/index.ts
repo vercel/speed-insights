@@ -1,12 +1,12 @@
+import type {} from '@sveltejs/kit'; // don't remove, ensures ambient types for $app/* are loaded
 import { get } from 'svelte/store';
+import { browser } from '$app/environment';
+import { page } from '$app/stores';
 import {
   injectSpeedInsights as genericInject,
   type SpeedInsightsProps,
 } from '../generic';
 import { getBasePath } from './utils';
-import { page } from '$app/stores';
-import { browser } from '$app/environment';
-import type {} from '@sveltejs/kit'; // don't remove, ensures ambient types for $app/* are loaded
 
 export function injectSpeedInsights(
   props: Omit<SpeedInsightsProps, 'framework'> = {},

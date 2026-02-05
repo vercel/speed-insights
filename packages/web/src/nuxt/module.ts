@@ -1,4 +1,4 @@
-import { defineNuxtModule, addPlugin, addTemplate } from '@nuxt/kit';
+import { addPlugin, addTemplate, defineNuxtModule } from '@nuxt/kit';
 import type { NuxtModule } from '@nuxt/schema';
 
 // eslint-disable-next-line import/no-default-export -- default export is required for nuxt module

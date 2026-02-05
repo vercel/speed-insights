@@ -1,11 +1,11 @@
 import { useRoute, useRouter } from 'nuxt/app';
-import type { SpeedInsightsProps } from '../../types';
-import { createComponent } from '../../vue/create-component';
 import {
-  injectSpeedInsights as genericInjectSpeedInsights,
   type BeforeSendMiddleware,
+  injectSpeedInsights as genericInjectSpeedInsights,
 } from '../../generic';
-import { isBrowser, computeRoute } from '../../utils';
+import type { SpeedInsightsProps } from '../../types';
+import { computeRoute, isBrowser } from '../../utils';
+import { createComponent } from '../../vue/create-component';
 import { getBasePath } from './utils';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- vue's defineComponent return type is any

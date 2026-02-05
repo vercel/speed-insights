@@ -1,6 +1,7 @@
 ---
 // Since this file will not be bundled by Tsup, it is referencing bundled files relative to dist/astro/
 import type { SpeedInsightsProps } from '../index.d.ts';
+
 type Props = Omit<SpeedInsightsProps, 'framework' | 'beforeSend'>;
 
 const propsStr = JSON.stringify(Astro.props);

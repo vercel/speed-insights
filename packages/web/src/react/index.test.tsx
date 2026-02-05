@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { afterEach, beforeEach, describe, it, expect } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
+import * as React from 'react';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { SpeedInsightsProps } from '../types';
 import { SpeedInsights } from '.';
 

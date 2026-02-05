@@ -1,6 +1,6 @@
 import { name as packageName, version } from '../package.json';
 import { initQueue } from './queue';
-import type { SpeedInsightsProps, BeforeSendMiddleware } from './types';
+import type { BeforeSendMiddleware, SpeedInsightsProps } from './types';
 import { computeRoute, getScriptSrc, isBrowser, isDevelopment } from './utils';
 
 /**

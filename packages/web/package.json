@@ -89,10 +89,7 @@
     "build": "tsup && pnpm copy-astro",
     "copy-astro": "cp -R src/astro dist/",
     "dev": "pnpm copy-astro && tsup --watch",
-    "lint": "eslint .",
-    "lint-fix": "eslint . --fix",
-    "test": "vitest",
-    "type-check": "tsc --noEmit"
+    "test": "vitest"
   },
   "devDependencies": {
     "@nuxt/kit": "^4.2.0",

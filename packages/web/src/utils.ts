@@ -10,7 +10,7 @@ function detectEnvironment(): 'development' | 'production' {
     if (env === 'development' || env === 'test') {
       return 'development';
     }
-  } catch (e) {
+  } catch {
     // do nothing, this is okay
   }
   return 'production';
@@ -54,7 +54,7 @@ export function computeRoute(
       }
     }
     return result;
-  } catch (e) {
+  } catch {
     return pathname;
   }
 }
