@@ -76,7 +76,7 @@ function getScriptSrc(
   props: SpeedInsightsProps & { basePath?: string },
 ): string {
   if (props.scriptSrc) {
-    return props.scriptSrc;
+    return makeAbsolute(props.scriptSrc);
   }
   if (isDevelopment()) {
     return 'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js';
@@ -85,7 +85,7 @@ function getScriptSrc(
     return 'https://va.vercel-scripts.com/v1/speed-insights/script.js';
   }
   if (props.basePath) {
-    return `${props.basePath}/speed-insights/script.js`;
+    return makeAbsolute(`${props.basePath}/speed-insights/script.js`);
   }
   return '/_vercel/speed-insights/script.js';
 }
@@ -130,10 +130,10 @@ export function loadProps(
   }
 
   if (props.endpoint) {
-    dataset.endpoint = props.endpoint;
+    dataset.endpoint = makeAbsolute(props.endpoint);
   } else if (props.basePath) {
     // backward compatibility
-    dataset.endpoint = `${props.basePath}/speed-insights/vitals`;
+    dataset.endpoint = makeAbsolute(`${props.basePath}/speed-insights/vitals`);
   }
 
   return {
@@ -141,4 +141,12 @@ export function loadProps(
     beforeSend: props.beforeSend,
     dataset,
   };
+}
+
+function makeAbsolute(url: string): string {
+  return url.startsWith('http://') ||
+    url.startsWith('https://') ||
+    url.startsWith('/')
+    ? url
+    : `/${url}`;
 }

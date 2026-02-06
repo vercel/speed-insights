@@ -172,6 +172,13 @@ describe('utils', () => {
         ).toBe(scriptSrc);
       });
 
+      it('adds leading slash to config value', () => {
+        const scriptSrc = `${Math.random()}.js`;
+        expect(
+          loadProps({}, JSON.stringify({ speedInsights: { scriptSrc } })).src,
+        ).toBe(`/${scriptSrc}`);
+      });
+
       it('uses props over config string', () => {
         const scriptSrc = `https://example.com/${Math.random()}.js`;
         expect(
@@ -180,6 +187,16 @@ describe('utils', () => {
             JSON.stringify({ speedInsights: { scriptSrc: 'notused' } }),
           ).src,
         ).toBe(scriptSrc);
+      });
+
+      it('adds leading slash to props value', () => {
+        const scriptSrc = `${Math.random()}.js`;
+        expect(
+          loadProps(
+            { scriptSrc },
+            JSON.stringify({ speedInsights: { scriptSrc: 'notused' } }),
+          ).src,
+        ).toBe(`/${scriptSrc}`);
       });
     });
 
