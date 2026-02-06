@@ -1,14 +1,13 @@
 import { useRoute, useRouter } from 'nuxt/app';
 import {
   type BeforeSendMiddleware,
-  injectSpeedInsights as genericInjectSpeedInsights,
+  injectSpeedInsights as inject,
 } from '../../generic';
 import type { SpeedInsightsProps } from '../../types';
 import { computeRoute, isBrowser } from '../../utils';
 import { createComponent } from '../../vue/create-component';
-import { getBasePath } from './utils';
+import { getBasePath, getConfigString } from './utils';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- vue's defineComponent return type is any
 export const SpeedInsights = createComponent('nuxt');
 export type { SpeedInsightsProps, BeforeSendMiddleware };
 
@@ -20,12 +19,15 @@ function injectSpeedInsights(
     const router = useRouter();
     const route = useRoute();
 
-    const speedInsights = genericInjectSpeedInsights({
-      ...props,
-      route: computeRoute(route.path, route.params),
-      framework: 'nuxt',
-      basePath: getBasePath(),
-    });
+    const speedInsights = inject(
+      {
+        ...props,
+        route: computeRoute(route.path, route.params),
+        framework: 'nuxt',
+        basePath: getBasePath(),
+      },
+      getConfigString(),
+    );
     // On navigation to a new page
     router.afterEach((to) => {
       speedInsights?.setRoute(computeRoute(to.path, to.params));

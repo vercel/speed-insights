@@ -1,19 +1,18 @@
 import React from 'react';
 import { SpeedInsights as SpeedInsightsScript } from '../react';
 import type { SpeedInsightsProps } from '../types';
-import { getBasePath, useRoute } from './utils';
+import { getBasePath, getConfigString, useRoute } from './utils';
 
 export function SpeedInsights(
   props: Omit<SpeedInsightsProps, 'route'>,
 ): JSX.Element {
-  const route = useRoute();
-
   return (
     <SpeedInsightsScript
-      route={route}
+      route={useRoute()}
       {...props}
-      framework="remix"
       basePath={getBasePath()}
+      configString={getConfigString()}
+      framework="remix"
     />
   );
 }

@@ -1,4 +1,9 @@
-import type { SpeedInsightsProps } from './types';
+import { name as packageName, version } from '../package.json';
+import type {
+  BeforeSend,
+  InjectSpeedInsightsProps,
+  SpeedInsightsProps,
+} from './types';
 
 export function isBrowser(): boolean {
   return typeof window !== 'undefined';
@@ -67,7 +72,7 @@ function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-export function getScriptSrc(
+function getScriptSrc(
   props: SpeedInsightsProps & { basePath?: string },
 ): string {
   if (props.scriptSrc) {
@@ -83,4 +88,57 @@ export function getScriptSrc(
     return `${props.basePath}/speed-insights/script.js`;
   }
   return '/_vercel/speed-insights/script.js';
+}
+
+export function loadProps(
+  explicitProps: InjectSpeedInsightsProps,
+  confString?: string,
+): {
+  src: string;
+  beforeSend?: BeforeSend;
+  dataset: Record<string, string>;
+} {
+  let props = explicitProps;
+  if (confString) {
+    try {
+      props = {
+        ...(JSON.parse(confString)
+          ?.speedInsights as Partial<SpeedInsightsProps>),
+        ...explicitProps,
+      };
+    } catch {
+      // Invalid JSON, use only explicit props
+    }
+  }
+
+  const dataset: Record<string, string> = {
+    sdkn: packageName + (props.framework ? `/${props.framework}` : ''),
+    sdkv: version,
+  };
+
+  if (props.sampleRate) {
+    dataset.sampleRate = props.sampleRate.toString();
+  }
+  if (props.route) {
+    dataset.route = props.route;
+  }
+  if (isDevelopment() && props.debug === false) {
+    dataset.debug = 'false';
+  }
+  if (props.dsn) {
+    dataset.dsn = props.dsn;
+  }
+
+  if (props.endpoint) {
+    dataset.endpoint = props.endpoint;
+  } else if (props.basePath) {
+    // backward compatibility
+    dataset.endpoint = `${props.basePath}/speed-insights/vitals`;
+  }
+
+  return {
+    src: getScriptSrc(props),
+    beforeSend: props.beforeSend,
+    dataset,
+  };
 }

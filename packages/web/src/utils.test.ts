@@ -1,5 +1,5 @@
-import { afterEach, describe, expect, it } from 'vitest';
-import { computeRoute, getScriptSrc } from './utils';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { computeRoute, loadProps } from './utils';
 
 describe('utils', () => {
   describe('computeRoute()', () => {
@@ -117,64 +117,245 @@ describe('utils', () => {
     });
   });
 
-  describe('getScriptSrc()', () => {
+  describe('loadProps()', () => {
     const envSave = { ...process.env };
+
+    beforeEach(() => {
+      process.env.NODE_ENV = 'production';
+    });
 
     afterEach(() => {
       process.env = { ...envSave };
     });
 
-    it('returns debug script in development', () => {
-      process.env.NODE_ENV = 'development';
-      expect(getScriptSrc({})).toBe(
-        'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js',
-      );
+    describe('script src', () => {
+      it('returns debug script in development', () => {
+        process.env.NODE_ENV = 'development';
+        expect(loadProps({}).src).toBe(
+          'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js',
+        );
+      });
+
+      it('uses the override prop in development', () => {
+        process.env.NODE_ENV = 'development';
+        const scriptSrc = `https://example.com/${Math.random()}/script.js`;
+        expect(loadProps({ scriptSrc }).src).toBe(scriptSrc);
+      });
+
+      it('returns generic route in production', () => {
+        expect(loadProps({}).src).toBe('/_vercel/speed-insights/script.js');
+      });
+
+      it('uses base path in production', () => {
+        const basePath = `/_vercel-${Math.random()}`;
+        expect(loadProps({ basePath }).src).toBe(
+          `${basePath}/speed-insights/script.js`,
+        );
+      });
+
+      it('ignores base path when using dsn and bas', () => {
+        const basePath = `/_vercel-${Math.random()}`;
+        expect(loadProps({ basePath, dsn: 'test' }).src).toBe(
+          'https://va.vercel-scripts.com/v1/speed-insights/script.js',
+        );
+      });
+
+      it('uses override prop in production', () => {
+        const scriptSrc = `https://example.com/${Math.random()}/script.js`;
+        expect(loadProps({ scriptSrc }).src).toBe(scriptSrc);
+      });
+
+      it('uses value from config string', () => {
+        const scriptSrc = `https://example.com/${Math.random()}.js`;
+        expect(
+          loadProps({}, JSON.stringify({ speedInsights: { scriptSrc } })).src,
+        ).toBe(scriptSrc);
+      });
+
+      it('uses props over config string', () => {
+        const scriptSrc = `https://example.com/${Math.random()}.js`;
+        expect(
+          loadProps(
+            { scriptSrc },
+            JSON.stringify({ speedInsights: { scriptSrc: 'notused' } }),
+          ).src,
+        ).toBe(scriptSrc);
+      });
     });
 
-    it('returns the specified prop in development', () => {
-      process.env.NODE_ENV = 'development';
-      const scriptSrc = `https://example.com/${Math.random()}/script.js`;
-      expect(getScriptSrc({ scriptSrc })).toBe(scriptSrc);
-    });
+    describe('dataset', () => {
+      it('returns default dataset with version and package name only', () => {
+        expect(loadProps({}).dataset).toEqual({
+          sdkn: '@vercel/speed-insights',
+          sdkv: expect.any(String) as string,
+        });
+      });
 
-    it('returns generic route in production', () => {
-      process.env.NODE_ENV = 'production';
-      expect(getScriptSrc({})).toBe('/_vercel/speed-insights/script.js');
-    });
+      it('includes the provided framework in sdkn', () => {
+        const framework = 'dojo';
+        expect(loadProps({ framework: framework }).dataset).toEqual(
+          expect.objectContaining({
+            sdkn: `@vercel/speed-insights/${framework}`,
+          }),
+        );
+      });
 
-    it('returns absolute route in production when using dsn', () => {
-      process.env.NODE_ENV = 'production';
-      expect(getScriptSrc({ dsn: 'test' })).toBe(
-        'https://va.vercel-scripts.com/v1/speed-insights/script.js',
-      );
-    });
+      it('uses the provided endpoint', () => {
+        const endpoint = 'https://example.com/speed-insights/vitals';
+        expect(loadProps({ endpoint }).dataset.endpoint).toEqual(endpoint);
+      });
 
-    it('returns base path in production', () => {
-      process.env.NODE_ENV = 'production';
-      const basePath = `/_vercel-${Math.random()}`;
-      expect(getScriptSrc({ basePath })).toBe(
-        `${basePath}/speed-insights/script.js`,
-      );
-    });
+      it('uses the provided basepath', () => {
+        const basePath = '/custom-base';
+        expect(loadProps({ basePath }).dataset.endpoint).toEqual(
+          `${basePath}/speed-insights/vitals`,
+        );
+      });
 
-    it('ignores base path when using dsn and bas', () => {
-      process.env.NODE_ENV = 'production';
-      const basePath = `/_vercel-${Math.random()}`;
-      expect(getScriptSrc({ basePath, dsn: 'test' })).toBe(
-        'https://va.vercel-scripts.com/v1/speed-insights/script.js',
-      );
-    });
+      it('prefers explicit endpoint over basePath', () => {
+        const endpoint = 'https://example.com/analytics';
+        const basePath = '/custom-base';
+        expect(loadProps({ endpoint, basePath }).dataset.endpoint).toEqual(
+          endpoint,
+        );
+      });
 
-    it('returns the specified prop in production', () => {
-      process.env.NODE_ENV = 'production';
-      const scriptSrc = `https://example.com/${Math.random()}/script.js`;
-      expect(getScriptSrc({ scriptSrc })).toBe(scriptSrc);
-    });
+      it('uses the provided dsn', () => {
+        const dsn = 'test-dsn-value';
+        expect(loadProps({ dsn }).dataset.dsn).toEqual(dsn);
+      });
 
-    it('returns the specified prop in production when using dsn', () => {
-      process.env.NODE_ENV = 'production';
-      const scriptSrc = `https://example.com/${Math.random()}/script.js`;
-      expect(getScriptSrc({ scriptSrc, dsn: 'test' })).toBe(scriptSrc);
+      it('can override debug in development', () => {
+        process.env.NODE_ENV = 'development';
+        expect(loadProps({ debug: false }).dataset.debug).toBe('false');
+      });
+
+      it('can not set debug in production', () => {
+        expect(loadProps({ debug: false }).dataset).not.toHaveProperty('debug');
+      });
+
+      it('returns complete dataset with all properties', () => {
+        process.env.NODE_ENV = 'development';
+        const dsn = 'test-dsn-value';
+        const endpoint = 'https://example.com/vitals';
+        const framework = 'nuxt';
+        const sampleRate = 0.5;
+        expect(
+          loadProps({
+            framework,
+            endpoint,
+            dsn,
+            debug: false,
+            sampleRate,
+          }).dataset,
+        ).toEqual(
+          expect.objectContaining({
+            sdkn: `@vercel/speed-insights/${framework}`,
+            sdkv: expect.any(String) as string,
+            endpoint,
+            dsn,
+            sampleRate: sampleRate.toString(),
+            debug: 'false',
+          }),
+        );
+      });
+
+      it('uses values from config string', () => {
+        process.env.NODE_ENV = 'development';
+        const dsn = 'test-dsn-value';
+        const endpoint = 'https://example.com/vitals';
+        const framework = 'nuxt';
+        const sampleRate = 0.5;
+        expect(
+          loadProps(
+            {},
+            JSON.stringify({
+              speedInsights: {
+                framework,
+                sampleRate,
+                endpoint,
+                dsn,
+                debug: false,
+              },
+            }),
+          ).dataset,
+        ).toEqual(
+          expect.objectContaining({
+            sdkn: `@vercel/speed-insights/${framework}`,
+            sdkv: expect.any(String) as string,
+            endpoint,
+            dsn,
+            sampleRate: sampleRate.toString(),
+            debug: 'false',
+          }),
+        );
+      });
+
+      it('uses props over config string', () => {
+        process.env.NODE_ENV = 'development';
+        const dsn = 'test-dsn-value';
+        const endpoint = 'https://example.com/analytics';
+        const framework = 'nuxt';
+        const sampleRate = 0.4;
+        expect(
+          loadProps(
+            {
+              framework,
+              endpoint,
+              dsn,
+              sampleRate,
+              debug: false,
+            },
+            JSON.stringify({
+              analytics: {
+                framework: 'nextjs',
+                sampleRate: 0.25,
+                endpoint: 'unused',
+                dsn: 'unused',
+                debug: true,
+              },
+            }),
+          ).dataset,
+        ).toEqual(
+          expect.objectContaining({
+            sdkn: `@vercel/speed-insights/${framework}`,
+            sdkv: expect.any(String) as string,
+            endpoint,
+            dsn,
+            sampleRate: sampleRate.toString(),
+            debug: 'false',
+          }),
+        );
+      });
+
+      it('ignores invalid config string and returns props ', () => {
+        process.env.NODE_ENV = 'development';
+        const dsn = 'test-dsn-value';
+        const endpoint = 'https://example.com/vitals';
+        const framework = 'nuxt';
+        const sampleRate = 0.5;
+        expect(
+          loadProps(
+            {
+              framework,
+              endpoint,
+              dsn,
+              debug: false,
+              sampleRate,
+            },
+            '{"invalid:{}}',
+          ).dataset,
+        ).toEqual(
+          expect.objectContaining({
+            sdkn: `@vercel/speed-insights/${framework}`,
+            sdkv: expect.any(String) as string,
+            endpoint,
+            dsn,
+            sampleRate: sampleRate.toString(),
+            debug: 'false',
+          }),
+        );
+      });
     });
   });
 });

@@ -1,15 +1,15 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { getBasePath } from './utils';
+import { getBasePath, getConfigString } from './utils';
+
+const processSave = { ...process };
+const envSave = { ...process.env };
+
+afterEach(() => {
+  global.process = { ...processSave };
+  process.env = { ...envSave };
+});
 
 describe('getBasePath()', () => {
-  const processSave = { ...process };
-  const envSave = { ...process.env };
-
-  afterEach(() => {
-    global.process = { ...processSave };
-    process.env = { ...envSave };
-  });
-
   it('returns null without process', () => {
     // @ts-expect-error -- yes, we want to completely drop process for this test!!
     global.process = undefined;
@@ -26,5 +26,29 @@ describe('getBasePath()', () => {
     const basepath = `/_vercel-${Math.random()}/insights`;
     process.env.NEXT_PUBLIC_VERCEL_OBSERVABILITY_BASEPATH = basepath;
     expect(getBasePath()).toBe(basepath);
+  });
+});
+
+describe('getConfigString()', () => {
+  it('returns undefined without process', () => {
+    // @ts-expect-error -- yes, we want to completely drop process for this test!!
+    global.process = undefined;
+    expect(getConfigString()).toBeUndefined();
+  });
+
+  it('returns undefined without process.env', () => {
+    // @ts-expect-error -- yes, we want to completely drop process.env for this test!!
+    process.env = undefined;
+    expect(getConfigString()).toBeUndefined();
+  });
+
+  it('returns configuration string set for Next.js', () => {
+    const config = JSON.stringify({
+      speedInsights: {
+        endpoint: `/_vercel-${Math.random()}`,
+      },
+    });
+    process.env.NEXT_PUBLIC_VERCEL_OBSERVABILITY_CLIENT_CONFIG = config;
+    expect(getConfigString()).toBe(config);
   });
 });
