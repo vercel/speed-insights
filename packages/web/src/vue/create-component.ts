@@ -21,7 +21,10 @@ export function createComponent(
       const route = useRoute();
       const configure = injectSpeedInsights(
         {
-          ...props,
+          ...Object.fromEntries(
+            // trim out undefined values to avoid overriding config values
+            Object.entries(props).filter(([_, v]) => v !== undefined),
+          ),
           framework,
           basePath: getBasePath(),
         },
