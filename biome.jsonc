@@ -7,9 +7,7 @@
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "indentWidth": 2,
-    "lineWidth": 80,
-    "lineEnding": "lf"
+    "indentWidth": 2
   },
   "javascript": {
     // So biome does not complain about React "unused" import
