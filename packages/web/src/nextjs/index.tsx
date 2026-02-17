@@ -3,7 +3,7 @@
 import React, { Suspense } from 'react';
 import { SpeedInsights as SpeedInsightsScript } from '../react';
 import type { SpeedInsightsProps } from '../types';
-import { getBasePath, useRoute } from './utils';
+import { getBasePath, getConfigString, useRoute } from './utils';
 
 type Props = Omit<SpeedInsightsProps, 'route'>;
 
@@ -16,6 +16,7 @@ function SpeedInsightsComponent(props: Props): React.ReactElement {
       {...props}
       framework="next"
       basePath={getBasePath()}
+      configString={getConfigString()}
     />
   );
 }

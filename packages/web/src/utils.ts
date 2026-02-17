@@ -1,4 +1,9 @@
-import type { SpeedInsightsProps } from './types';
+import { name as packageName, version } from '../package.json';
+import type {
+  BeforeSend,
+  InjectSpeedInsightsProps,
+  SpeedInsightsProps,
+} from './types';
 
 export function isBrowser(): boolean {
   return typeof window !== 'undefined';
@@ -10,7 +15,7 @@ function detectEnvironment(): 'development' | 'production' {
     if (env === 'development' || env === 'test') {
       return 'development';
     }
-  } catch (e) {
+  } catch {
     // do nothing, this is okay
   }
   return 'production';
@@ -54,7 +59,7 @@ export function computeRoute(
       }
     }
     return result;
-  } catch (e) {
+  } catch {
     return pathname;
   }
 }
@@ -67,11 +72,11 @@ function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-export function getScriptSrc(
+function getScriptSrc(
   props: SpeedInsightsProps & { basePath?: string },
 ): string {
   if (props.scriptSrc) {
-    return props.scriptSrc;
+    return makeAbsolute(props.scriptSrc);
   }
   if (isDevelopment()) {
     return 'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js';
@@ -80,7 +85,68 @@ export function getScriptSrc(
     return 'https://va.vercel-scripts.com/v1/speed-insights/script.js';
   }
   if (props.basePath) {
-    return `${props.basePath}/speed-insights/script.js`;
+    return makeAbsolute(`${props.basePath}/speed-insights/script.js`);
   }
   return '/_vercel/speed-insights/script.js';
+}
+
+export function loadProps(
+  explicitProps: InjectSpeedInsightsProps,
+  confString?: string,
+): {
+  src: string;
+  beforeSend?: BeforeSend;
+  dataset: Record<string, string>;
+} {
+  let props = explicitProps;
+  if (confString) {
+    try {
+      props = {
+        ...(JSON.parse(confString)
+          ?.speedInsights as Partial<SpeedInsightsProps>),
+        ...explicitProps,
+      };
+    } catch {
+      // Invalid JSON, use only explicit props
+    }
+  }
+
+  const dataset: Record<string, string> = {
+    sdkn: packageName + (props.framework ? `/${props.framework}` : ''),
+    sdkv: version,
+  };
+
+  if (props.sampleRate) {
+    dataset.sampleRate = props.sampleRate.toString();
+  }
+  if (props.route) {
+    dataset.route = props.route;
+  }
+  if (isDevelopment() && props.debug === false) {
+    dataset.debug = 'false';
+  }
+  if (props.dsn) {
+    dataset.dsn = props.dsn;
+  }
+
+  if (props.endpoint) {
+    dataset.endpoint = makeAbsolute(props.endpoint);
+  } else if (props.basePath) {
+    // backward compatibility
+    dataset.endpoint = makeAbsolute(`${props.basePath}/speed-insights/vitals`);
+  }
+
+  return {
+    src: getScriptSrc(props),
+    beforeSend: props.beforeSend,
+    dataset,
+  };
+}
+
+function makeAbsolute(url: string): string {
+  return url.startsWith('http://') ||
+    url.startsWith('https://') ||
+    url.startsWith('/')
+    ? url
+    : `/${url}`;
 }

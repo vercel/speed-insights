@@ -3,7 +3,7 @@ import { defineComponent, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { injectSpeedInsights, type SpeedInsightsProps } from '../generic';
 import { computeRoute } from '../utils';
-import { getBasePath } from './utils';
+import { getBasePath, getConfigString } from './utils';
 
 export function createComponent(
   framework = 'vue',
@@ -19,12 +19,17 @@ export function createComponent(
     ],
     setup(props: Omit<SpeedInsightsProps, 'framework'>) {
       const route = useRoute();
-      const configure = injectSpeedInsights({
-        ...props,
-        framework,
-        basePath: getBasePath(),
-      });
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- route is undefined for barebone vue project
+      const configure = injectSpeedInsights(
+        {
+          ...Object.fromEntries(
+            // trim out undefined values to avoid overriding config values
+            Object.entries(props).filter(([_, v]) => v !== undefined),
+          ),
+          framework,
+          basePath: getBasePath(),
+        },
+        getConfigString(),
+      );
       if (route && configure) {
         const changeRoute = (): void => {
           configure.setRoute(computeRoute(route.path, route.params));

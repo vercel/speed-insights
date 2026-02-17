@@ -2,28 +2,32 @@ export interface SpeedInsightsProps {
   dsn?: string;
   sampleRate?: number; // Only send a percentage of events to the server to reduce costs
   route?: string | null; // The dynamic path if there is any (e.g. /blog/[slug]) otherwise the static path
-  beforeSend?: BeforeSendMiddleware;
+  beforeSend?: BeforeSend;
   debug?: boolean;
 
   scriptSrc?: string;
   endpoint?: string;
 }
 
+export type InjectSpeedInsightsProps = SpeedInsightsProps & {
+  framework?: string;
+  basePath?: string;
+};
+
 export type EventTypes = 'vital';
 
-export interface Event {
+export interface BeforeSendEvent {
   type: EventTypes;
   url: string;
   route?: string;
 }
 
-export type BeforeSendMiddleware = (
-  data: Event,
-  // Should we be more strict here? Compiler won't help a lot if it's that loose
-) => Event | null | undefined | false;
+export type BeforeSend = (
+  event: BeforeSendEvent,
+) => BeforeSendEvent | null | undefined | false;
 
 export interface Functions {
-  beforeSend?: BeforeSendMiddleware;
+  beforeSend?: BeforeSend;
 }
 
 export interface SpeedInsights<T extends keyof Functions = keyof Functions> {
@@ -42,6 +46,6 @@ declare global {
     sil?: boolean;
 
     /** used by Astro component only */
-    speedInsightsBeforeSend?: BeforeSendMiddleware;
+    speedInsightsBeforeSend?: BeforeSend;
   }
 }

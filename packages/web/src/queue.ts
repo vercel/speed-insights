@@ -3,6 +3,7 @@ export const initQueue = (): void => {
   if (window.si) return;
 
   window.si = function a(...params): void {
-    (window.siq = window.siq || []).push(params);
+    window.siq = window.siq || [];
+    window.siq.push(params);
   };
 };
