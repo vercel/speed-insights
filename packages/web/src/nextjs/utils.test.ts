@@ -1,5 +1,9 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { getBasePath, getConfigString } from './utils';
+import {
+  filterParallelRouteParams,
+  getBasePath,
+  getConfigString,
+} from './utils';
 
 const processSave = { ...process };
 const envSave = { ...process.env };
@@ -7,6 +11,47 @@ const envSave = { ...process.env };
 afterEach(() => {
   global.process = { ...processSave };
   process.env = { ...envSave };
+});
+
+describe('filterParallelRouteParams()', () => {
+  it('filters single-segment slot catch-all from static main route', () => {
+    // @sidebar/[...catchAll] matched "dashboard" — a single segment not in main route
+    const result = filterParallelRouteParams({ catchAll: ['dashboard'] }, [
+      'dashboard',
+    ]);
+    expect(result).toEqual({});
+  });
+
+  it('keeps multi-segment catch-all that appears in segments', () => {
+    const result = filterParallelRouteParams({ slug: ['blog', 'my-post'] }, [
+      'blog/my-post',
+    ]);
+    expect(result).toEqual({ slug: ['blog', 'my-post'] });
+  });
+
+  it('keeps string params and filters slot array params', () => {
+    const result = filterParallelRouteParams(
+      { id: 'abc', catchAll: ['dashboard'] },
+      ['some-other-segment'],
+    );
+    expect(result).toEqual({ id: 'abc' });
+  });
+
+  it('filters multi-segment slot catch-all whose joined value is not in segments', () => {
+    const result = filterParallelRouteParams({ catchAll: ['a', 'b'] }, [
+      'c',
+      'd',
+    ]);
+    expect(result).toEqual({});
+  });
+
+  it('keeps all params when segments is empty', () => {
+    const result = filterParallelRouteParams(
+      { id: 'abc', slug: ['x', 'y'] },
+      [],
+    );
+    expect(result).toEqual({ id: 'abc' });
+  });
 });
 
 describe('getBasePath()', () => {

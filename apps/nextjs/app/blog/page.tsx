@@ -5,6 +5,10 @@ export default function Blog() {
     <div>
       <h1>Welcome to the Blog</h1>
       <Link href="/blog/test">First blog entry</Link>
+      <Link href="/parallel-routes/dashboard">
+        Parallel routes (App Router)
+      </Link>
+      git
     </div>
   );
 }
