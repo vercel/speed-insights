@@ -14,6 +14,3 @@ minimumReleaseAge: 2880
 
 minimumReleaseAgeExclude:
   - '@vercel/*'
-
-overrides:
-  valibot: ^1.2.0
