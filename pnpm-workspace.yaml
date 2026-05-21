@@ -2,3 +2,15 @@ packages:
   - 'packages/*'
   - 'examples/*'
   - 'apps/*'
+
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  esbuild: true
+  lefthook: true
+  sharp: true
+
+minimumReleaseAge: 2880
+
+minimumReleaseAgeExclude:
+  - '@vercel/*'
