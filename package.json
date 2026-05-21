@@ -6,7 +6,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@biomejs/biome": "^2.3.10",
+    "@biomejs/biome": "2.3.10",
     "lefthook": "^2.0.12",
     "typescript": "^5.3.3"
   },
