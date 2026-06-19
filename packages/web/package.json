@@ -11,6 +11,9 @@
     "directory": "packages/web"
   },
   "license": "Apache-2.0",
+  "publishConfig": {
+    "provenance": true
+  },
   "exports": {
     "./package.json": "./package.json",
     ".": {
