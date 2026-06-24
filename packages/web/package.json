@@ -116,11 +116,11 @@
     "vue-router": "^4.4.5"
   },
   "peerDependencies": {
-    "@sveltejs/kit": "^1 || ^2",
+    "@sveltejs/kit": "^3 || ^3.0.0-next.0",
     "next": ">= 13",
     "nuxt": ">= 3",
     "react": "^18 || ^19 || ^19.0.0-rc",
-    "svelte": ">= 4",
+    "svelte": "^5",
     "vue": "^3",
     "vue-router": "^4"
   },
