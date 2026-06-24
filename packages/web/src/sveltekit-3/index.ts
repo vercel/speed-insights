@@ -1,4 +1,5 @@
 import type {} from '@sveltejs/kit'; // don't remove, ensures ambient types for $app/* are loaded
+import { browser } from '$app/env';
 import { page } from '$app/state';
 import { injectSpeedInsights as inject } from '../generic';
 import type { BeforeSend, BeforeSendEvent, SpeedInsightsProps } from '../types';
@@ -9,9 +10,7 @@ export function injectSpeedInsights(
 ): void {
   let speedInsights: ReturnType<typeof inject>;
 
-  $effect.pre(() => {
-    if (speedInsights) return;
-
+  if (browser) {
     speedInsights = inject(
       {
         route: page.route?.id,
@@ -21,7 +20,7 @@ export function injectSpeedInsights(
       },
       getConfigString(),
     );
-  });
+  }
 
   $effect.pre(() => {
     speedInsights?.setRoute(page.route.id);

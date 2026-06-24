@@ -52,6 +52,10 @@
       "types": "./dist/sveltekit/index.d.ts",
       "svelte": "./dist/sveltekit/index.mjs"
     },
+    "./sveltekit-3": {
+      "types": "./dist/sveltekit-3/index.d.ts",
+      "svelte": "./dist/sveltekit-3/index.mjs"
+    },
     "./vue": {
       "browser": "./dist/vue/index.mjs",
       "import": "./dist/vue/index.mjs",
@@ -98,7 +102,7 @@
     "@nuxt/kit": "^4.2.0",
     "@nuxt/schema": "^4.2.0",
     "@remix-run/react": "^2.14.0",
-    "@sveltejs/kit": "^2.8.1",
+    "@sveltejs/kit": "^3.0.0-next.0",
     "@swc/core": "^1.9.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
@@ -116,11 +120,11 @@
     "vue-router": "^4.4.5"
   },
   "peerDependencies": {
-    "@sveltejs/kit": "^3 || ^3.0.0-next.0",
+    "@sveltejs/kit": "^1 || ^2 || ^3 || ^3.0.0-next.0",
     "next": ">= 13",
     "nuxt": ">= 3",
     "react": "^18 || ^19 || ^19.0.0-rc",
-    "svelte": "^5",
+    "svelte": ">= 4",
     "vue": "^3",
     "vue-router": "^4"
   },
