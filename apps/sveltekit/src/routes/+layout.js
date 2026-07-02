@@ -1,3 +1,3 @@
-import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit-3';
 
 injectSpeedInsights();
