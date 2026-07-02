@@ -19,16 +19,16 @@ This package does **not** track data in development mode.
 
 It has 1st class integration with:
 
-| Framework   | Package                              |
-| ----------- | ------------------------------------ |
-| Next.js     | `@vercel/speed-insights/next`        |
-| Nuxt        | `@vercel/speed-insights/nuxt`        |
-| SvelteKit 3 | `@vercel/speed-insights/sveltekit`   |
-| SvelteKit 2 | `@vercel/speed-insights/sveltekit-2` |
-| Remix       | `@vercel/speed-insights/remix`       |
-| React       | `@vercel/speed-insights/react`       |
-| Astro       | `@vercel/speed-insights/astro`       |
-| Vue         | `@vercel/speed-insights/vue`         |
+| Framework   | Package                                   |
+| ----------- | ----------------------------------------- |
+| Next.js     | `@vercel/speed-insights/next`             |
+| Nuxt        | `@vercel/speed-insights/nuxt`             |
+| SvelteKit   | `@vercel/speed-insights/sveltekit`        |
+| SvelteKit 3 | `@vercel/speed-insights/sveltekit-next`  |
+| Remix       | `@vercel/speed-insights/remix`            |
+| React       | `@vercel/speed-insights/react`            |
+| Astro       | `@vercel/speed-insights/astro`            |
+| Vue         | `@vercel/speed-insights/vue`              |
 
 It also supports other frameworks, vanilla JS and static websites.
 
@@ -39,8 +39,8 @@ It also supports other frameworks, vanilla JS and static websites.
 3. Inject Speed Insights to your app
 
    - If you are using **Next.js**, **React**, **Nuxt** or **Vue** you can use the framework-specific `<SpeedInsights />` component to inject the script into your app.
-   - If you are using **SvelteKit 3**, you can use the `injectSpeedInsights()` function from `@vercel/speed-insights/sveltekit` in your top-level `+layout.js/ts` file.
-   - If you are using **SvelteKit 2**, import `injectSpeedInsights()` from `@vercel/speed-insights/sveltekit-2` instead.
+   - If you are using **SvelteKit 2**, you can use the `injectSpeedInsights()` function from `@vercel/speed-insights/sveltekit` in your top-level `+layout.js/ts` file.
+   - If you are using **SvelteKit 3**, import `injectSpeedInsights()` from `@vercel/speed-insights/sveltekit-next` instead.
    - For other frameworks, you can use the `inject` function add the tracking script to your app.
    - If you want to use Vercel Speed Insights on a static site without npm, follow the instructions in the [documentation](https://vercel.com/docs/speed-insights/quickstart).
 
