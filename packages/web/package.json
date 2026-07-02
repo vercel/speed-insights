@@ -53,8 +53,8 @@
       "svelte": "./dist/sveltekit/index.mjs"
     },
     "./sveltekit-3": {
-      "types": "./dist/sveltekit-3/index.d.ts",
-      "svelte": "./dist/sveltekit-3/index.mjs"
+      "types": "./dist/sveltekit-3/index.svelte.d.ts",
+      "svelte": "./dist/sveltekit-3/index.svelte.mjs"
     },
     "./vue": {
       "browser": "./dist/vue/index.mjs",
@@ -86,6 +86,9 @@
       ],
       "sveltekit": [
         "dist/sveltekit/index.d.ts"
+      ],
+      "sveltekit-3": [
+        "dist/sveltekit-3/index.svelte.d.ts"
       ],
       "vue": [
         "dist/vue/index.d.ts"

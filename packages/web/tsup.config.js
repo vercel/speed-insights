@@ -75,9 +75,10 @@ export default defineConfig([
   {
     ...cfg,
     entry: {
-      index: 'src/sveltekit-3/index.ts',
+      'index.svelte': 'src/sveltekit-3/index.svelte.ts',
     },
     external: ['svelte', '@sveltejs/kit', '$app'],
+
     outDir: 'dist/sveltekit-3',
   },
   {
