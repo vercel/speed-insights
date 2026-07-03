@@ -53,8 +53,8 @@
       "svelte": "./dist/sveltekit/index.mjs"
     },
     "./sveltekit-next": {
-      "types": "./dist/sveltekit-next/index.svelte.d.mts",
-      "svelte": "./dist/sveltekit-next/index.svelte.mjs"
+      "types": "./dist/sveltekit-next/index.d.mts",
+      "svelte": "./dist/sveltekit-next/index.svelte.js"
     },
     "./vue": {
       "browser": "./dist/vue/index.mjs",
@@ -88,7 +88,7 @@
         "dist/sveltekit/index.d.ts"
       ],
       "sveltekit-next": [
-        "dist/sveltekit-next/index.svelte.d.mts"
+        "dist/sveltekit-next/index.d.mts"
       ],
       "vue": [
         "dist/vue/index.d.ts"
@@ -96,9 +96,10 @@
     }
   },
   "scripts": {
-    "build": "tsup && pnpm copy-astro",
+    "build": "tsup && pnpm copy-astro && pnpm copy-sveltekit-next-package",
     "copy-astro": "cp -R src/astro dist/",
-    "dev": "pnpm copy-astro && tsup --watch",
+    "copy-sveltekit-next-package": "mkdir -p dist/sveltekit-next && cp src/sveltekit-next/package.json dist/sveltekit-next/package.json",
+    "dev": "pnpm copy-astro && pnpm copy-sveltekit-next-package && tsup --watch",
     "test": "vitest"
   },
   "devDependencies": {
