@@ -75,6 +75,16 @@ export default defineConfig([
   {
     ...cfg,
     entry: {
+      index: 'src/sveltekit-next/index.ts',
+    },
+    external: ['svelte', '@sveltejs/kit', '$app'],
+    format: ['esm'],
+    outDir: 'dist/sveltekit-next',
+    outExtension: () => ({ js: '.svelte.js' }),
+  },
+  {
+    ...cfg,
+    entry: {
       index: 'src/vue/index.ts',
     },
     external: ['vue', 'vue-router'],
