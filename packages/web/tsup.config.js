@@ -75,12 +75,11 @@ export default defineConfig([
   {
     ...cfg,
     entry: {
-      index: 'src/sveltekit-next/index.ts',
+      'index.svelte': 'src/sveltekit-next/index.svelte.ts',
     },
     external: ['svelte', '@sveltejs/kit', '$app'],
     format: ['esm'],
     outDir: 'dist/sveltekit-next',
-    outExtension: () => ({ js: '.svelte.js' }),
   },
   {
     ...cfg,

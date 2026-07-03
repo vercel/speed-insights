@@ -53,8 +53,8 @@
       "svelte": "./dist/sveltekit/index.mjs"
     },
     "./sveltekit-next": {
-      "types": "./dist/sveltekit-next/index.d.mts",
-      "svelte": "./dist/sveltekit-next/index.svelte.js"
+      "types": "./dist/sveltekit-next/index.svelte.d.mts",
+      "svelte": "./dist/sveltekit-next/index.svelte.mjs"
     },
     "./vue": {
       "browser": "./dist/vue/index.mjs",
@@ -88,7 +88,7 @@
         "dist/sveltekit/index.d.ts"
       ],
       "sveltekit-next": [
-        "dist/sveltekit-next/index.d.mts"
+        "dist/sveltekit-next/index.svelte.d.mts"
       ],
       "vue": [
         "dist/vue/index.d.ts"
