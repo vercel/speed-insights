@@ -7,6 +7,18 @@ import type {
 import { computeRoute, isBrowser, loadProps } from './utils';
 
 /**
+ * Triggers a fetch call to the specified URL to warm up the endpoint.
+ * Any errors are silently ignored.
+ */
+async function warmUpScript(src: string): Promise<void> {
+  try {
+    await fetch(src);
+  } catch (err) {
+    void 0; // no-op to satisfy non-empty block rules
+  }
+}
+
+/**
  * Injects the Vercel Speed Insights script into the page head and starts tracking page views. Read more in our [documentation](https://vercel.com/docs/speed-insights).
  * @param [props] - Speed Insights options.
  * @param [props.debug] - Whether to enable debug logging in development. Defaults to `true`.
@@ -50,7 +62,9 @@ function injectSpeedInsights(
     );
   };
 
-  document.head.appendChild(script);
+  void warmUpScript(src).finally(() => {
+    document.head.appendChild(script);
+  });
 
   return {
     setRoute: (route: string | null): void => {
