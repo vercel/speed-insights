@@ -1,7 +1,7 @@
 ![Speed Insights](https://github.com/vercel/speed-insights/blob/main/.github/banner.png)
 
 <div align="center"><strong>Vercel Speed Insights</strong></div>
-<div align="center">Performance insights for your website</div>
+<div align="center">Performance insights for your website 🦆</div>
 <br />
 <div align="center">
 <a href="https://vercel.com/docs/speed-insights">Website</a>
