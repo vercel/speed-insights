@@ -9,6 +9,18 @@ describe('injectSpeedInsights()', () => {
     expectInjectedScript();
   });
 
+  it.each([
+    true,
+    false,
+    undefined,
+  ])('passes softNavs=%s to the injected script', (softNavs) => {
+    injectSpeedInsights({ softNavs });
+
+    expect(
+      document.querySelector('script')?.getAttribute('data-soft-navs'),
+    ).toBe(softNavs === undefined ? null : String(softNavs));
+  });
+
   it('can set framework', () => {
     const framework = 'sveltekit';
     expect(injectSpeedInsights({ framework })).toEqual({

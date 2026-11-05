@@ -208,6 +208,43 @@ describe('utils', () => {
         });
       });
 
+      describe.each(['development', 'production'])('softNavs in %s', (mode) => {
+        beforeEach(() => {
+          process.env.NODE_ENV = mode;
+        });
+
+        it.each([true, false])('serializes softNavs=%s', (softNavs) => {
+          expect(loadProps({ softNavs }).dataset.softNavs).toBe(
+            String(softNavs),
+          );
+        });
+
+        it('omits an unspecified softNavs option', () => {
+          expect(loadProps({ softNavs: undefined }).dataset).not.toHaveProperty(
+            'softNavs',
+          );
+        });
+
+        it.each([true, false])('reads softNavs=%s from config', (softNavs) => {
+          expect(
+            loadProps({}, JSON.stringify({ speedInsights: { softNavs } }))
+              .dataset.softNavs,
+          ).toBe(String(softNavs));
+        });
+
+        it.each([
+          true,
+          false,
+        ])('prefers explicit softNavs=%s over config', (softNavs) => {
+          expect(
+            loadProps(
+              { softNavs },
+              JSON.stringify({ speedInsights: { softNavs: !softNavs } }),
+            ).dataset.softNavs,
+          ).toBe(String(softNavs));
+        });
+      });
+
       it('includes the provided framework in sdkn', () => {
         const framework = 'dojo';
         expect(loadProps({ framework: framework }).dataset).toEqual(

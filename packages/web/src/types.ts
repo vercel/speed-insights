@@ -4,6 +4,8 @@ export interface SpeedInsightsProps {
   route?: string | null; // The dynamic path if there is any (e.g. /blog/[slug]) otherwise the static path
   beforeSend?: BeforeSend;
   debug?: boolean;
+  /** Set to false to disable soft-navigation reporting. Omit to use the script default. */
+  softNavs?: boolean;
 
   scriptSrc?: string;
   endpoint?: string;

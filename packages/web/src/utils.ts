@@ -122,6 +122,9 @@ export function loadProps(
   if (props.route) {
     dataset.route = props.route;
   }
+  if (typeof props.softNavs === 'boolean') {
+    dataset.softNavs = String(props.softNavs);
+  }
   if (isDevelopment() && props.debug === false) {
     dataset.debug = 'false';
   }
