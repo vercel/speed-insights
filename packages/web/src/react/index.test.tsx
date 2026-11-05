@@ -45,7 +45,11 @@ describe('<SpeedInsights />', () => {
       expect(script).toHaveAttribute('defer');
     });
 
-    it.each([true, false, undefined])('passes softNavs=%s', (softNavs) => {
+    it.each([
+      { softNavs: true },
+      { softNavs: false },
+      { softNavs: undefined },
+    ])('passes softNavs=$softNavs', ({ softNavs }) => {
       render(<SpeedInsights softNavs={softNavs} />);
 
       expect(

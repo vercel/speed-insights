@@ -213,7 +213,10 @@ describe('utils', () => {
           process.env.NODE_ENV = mode;
         });
 
-        it.each([true, false])('serializes softNavs=%s', (softNavs) => {
+        it.each([
+          { softNavs: true },
+          { softNavs: false },
+        ])('serializes softNavs=$softNavs', ({ softNavs }) => {
           expect(loadProps({ softNavs }).dataset.softNavs).toBe(
             String(softNavs),
           );
@@ -225,7 +228,10 @@ describe('utils', () => {
           );
         });
 
-        it.each([true, false])('reads softNavs=%s from config', (softNavs) => {
+        it.each([
+          { softNavs: true },
+          { softNavs: false },
+        ])('reads softNavs=$softNavs from config', ({ softNavs }) => {
           expect(
             loadProps({}, JSON.stringify({ speedInsights: { softNavs } }))
               .dataset.softNavs,
@@ -233,9 +239,11 @@ describe('utils', () => {
         });
 
         it.each([
-          true,
-          false,
-        ])('prefers explicit softNavs=%s over config', (softNavs) => {
+          { softNavs: true },
+          { softNavs: false },
+        ])('prefers explicit softNavs=$softNavs over config', ({
+          softNavs,
+        }) => {
           expect(
             loadProps(
               { softNavs },

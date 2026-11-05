@@ -10,10 +10,10 @@ describe('injectSpeedInsights()', () => {
   });
 
   it.each([
-    true,
-    false,
-    undefined,
-  ])('passes softNavs=%s to the injected script', (softNavs) => {
+    { softNavs: true },
+    { softNavs: false },
+    { softNavs: undefined },
+  ])('passes softNavs=$softNavs to the injected script', ({ softNavs }) => {
     injectSpeedInsights({ softNavs });
 
     expect(

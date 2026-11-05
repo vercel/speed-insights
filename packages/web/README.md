@@ -68,8 +68,6 @@ For `injectSpeedInsights`, including the SvelteKit and Nuxt runtime integrations
 injectSpeedInsights({ softNavs: false });
 ```
 
-This sets `data-soft-navs="false"` on the injected script. Set `softNavs` to `true` to enable reporting in supported browsers. Omit the option to use the injected script's default. The option can also be set in the client configuration as `speedInsights.softNavs`; an explicit prop takes precedence.
-
 ## Documentation
 
 Find more details about this package in our [documentation](https://vercel.com/docs/speed-insights/quickstart).

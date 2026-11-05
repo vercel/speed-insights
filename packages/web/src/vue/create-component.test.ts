@@ -18,16 +18,22 @@ describe.each(['vue', 'nuxt'])('%s SpeedInsights component', (framework) => {
     return document.head.querySelector('script');
   }
 
-  it.each([true, false, undefined])('passes softNavs=%s', (softNavs) => {
+  it.each([
+    { softNavs: true },
+    { softNavs: false },
+    { softNavs: undefined },
+  ])('passes softNavs=$softNavs', ({ softNavs }) => {
     expect(mount({ softNavs })?.getAttribute('data-soft-navs')).toBe(
       softNavs === undefined ? null : String(softNavs),
     );
   });
 
   it.each([
-    true,
-    false,
-  ])('preserves softNavs=%s from config when omitted', (softNavs) => {
+    { softNavs: true },
+    { softNavs: false },
+  ])('preserves softNavs=$softNavs from config when omitted', ({
+    softNavs,
+  }) => {
     vi.stubEnv(
       'VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG',
       JSON.stringify({ speedInsights: { softNavs } }),
@@ -37,9 +43,9 @@ describe.each(['vue', 'nuxt'])('%s SpeedInsights component', (framework) => {
   });
 
   it.each([
-    true,
-    false,
-  ])('prefers explicit softNavs=%s over config', (softNavs) => {
+    { softNavs: true },
+    { softNavs: false },
+  ])('prefers explicit softNavs=$softNavs over config', ({ softNavs }) => {
     vi.stubEnv(
       'VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG',
       JSON.stringify({ speedInsights: { softNavs: !softNavs } }),
