@@ -46,6 +46,28 @@ It also supports other frameworks, vanilla JS and static websites.
 
 4. Deploy your app to Vercel and see data flowing in.
 
+## Soft navigations
+
+To disable performance reporting for client-side navigations, set `softNavs` to `false` when you initialize Speed Insights. Hard-navigation reporting is not affected.
+
+For React, Next.js, Remix, and Astro components:
+
+```jsx
+<SpeedInsights softNavs={false} />
+```
+
+For Vue and Nuxt components, bind the boolean value:
+
+```vue
+<SpeedInsights :soft-navs="false" />
+```
+
+For `injectSpeedInsights`, including the SvelteKit and Nuxt runtime integrations:
+
+```js
+injectSpeedInsights({ softNavs: false });
+```
+
 ## Documentation
 
 Find more details about this package in our [documentation](https://vercel.com/docs/speed-insights/quickstart).
