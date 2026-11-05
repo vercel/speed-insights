@@ -1,11 +1,15 @@
 import type {} from '@sveltejs/kit'; // don't remove, ensures ambient types for $app/* are loaded
 import { get } from 'svelte/store';
+// @ts-expect-error $app/environment has been removed in kit 3
 import { browser } from '$app/environment';
 import { page } from '$app/stores';
 import { injectSpeedInsights as inject } from '../generic';
 import type { BeforeSend, BeforeSendEvent, SpeedInsightsProps } from '../types';
 import { getBasePath, getConfigString } from './utils';
 
+/**
+ * Injects Vercel Speed Insights in SvelteKit 2 apps.
+ */
 export function injectSpeedInsights(
   props: Omit<SpeedInsightsProps, 'framework'> = {},
 ): void {
