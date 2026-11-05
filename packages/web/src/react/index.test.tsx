@@ -45,9 +45,21 @@ describe('<SpeedInsights />', () => {
       expect(script).toHaveAttribute('defer');
     });
 
+    it.each([
+      { softNavs: true },
+      { softNavs: false },
+      { softNavs: undefined },
+    ])('passes softNavs=$softNavs', ({ softNavs }) => {
+      render(<SpeedInsights softNavs={softNavs} />);
+
+      expect(
+        document.head.querySelector('script')?.getAttribute('data-soft-navs'),
+      ).toBe(softNavs === undefined ? null : String(softNavs));
+    });
+
     it('uses config string', () => {
       const endpoint = `/_vercel-${Math.random()}`;
-      const sampleRate = Math.round(Math.random() * 10) / 10;
+      const sampleRate = 0.5;
       const scriptSrc = `http://acme.org/_vercel/${Math.random()}`;
       process.env.REACT_APP_VERCEL_OBSERVABILITY_CLIENT_CONFIG = JSON.stringify(
         {
