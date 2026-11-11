@@ -68,6 +68,21 @@ For `injectSpeedInsights`, including the SvelteKit and Nuxt runtime integrations
 injectSpeedInsights({ softNavs: false });
 ```
 
+## Nuxt module options
+
+The Nuxt module passes its options through to the client plugin, so you can configure it from `nuxt.config.ts`:
+
+```ts
+export default defineNuxtConfig({
+  modules: ['@vercel/speed-insights'],
+  speedInsights: {
+    sampleRate: 0.25,
+  },
+})
+```
+
+Supported options are `dsn`, `sampleRate`, `debug`, `softNavs`, `scriptSrc`, and `endpoint`. To configure the `beforeSend` middleware, use a custom plugin.
+
 ## Documentation
 
 Find more details about this package in our [documentation](https://vercel.com/docs/speed-insights/quickstart).
