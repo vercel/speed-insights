@@ -12,6 +12,7 @@ export function createComponent(
     props: [
       'dsn',
       'sampleRate',
+      'softNavs',
       'beforeSend',
       'debug',
       'scriptSrc',

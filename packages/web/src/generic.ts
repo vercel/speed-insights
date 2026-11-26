@@ -12,6 +12,7 @@ import { computeRoute, isBrowser, loadProps } from './utils';
  * @param [props.debug] - Whether to enable debug logging in development. Defaults to `true`.
  * @param [props.beforeSend] - A middleware function to modify events before they are sent. Should return the event object or `null` to cancel the event.
  * @param [props.sampleRate] - When setting to 0.5, 50% of the events will be sent to Vercel Speed Insights. Defaults to `1`.
+ * @param [props.softNavs] - Set to `false` to disable soft-navigation reporting. Omit to use the injected script's default.
  * @param [props.route] - The dynamic route of the page.
  * @param [props.dsn] - The DSN of the project to send events to. Only required when self-hosting.
  * @param [confString] - an optional JSON string (InjectSpeedInsightsProps) containing the default configuration. Explicit props will take over any provided default.
