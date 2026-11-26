@@ -22,10 +22,33 @@ afterEach(() => {
 
 describe('nuxt module', () => {
   it.each([
-    [{}, '{}'],
-    [{ sampleRate: 0.25 }, '{"sampleRate":0.25}'],
-    [{ debug: false, softNavs: false }, '{"debug":false,"softNavs":false}'],
-  ] as const)('passes %j options to the plugin', (options, serialized) => {
+    { caseName: 'empty options', options: {}, serialized: '{}' },
+    {
+      caseName: 'sampleRate',
+      options: { sampleRate: 0.25 },
+      serialized: '{"sampleRate":0.25}',
+    },
+    {
+      caseName: 'softNavs=true',
+      options: { softNavs: true },
+      serialized: '{"softNavs":true}',
+    },
+    {
+      caseName: 'softNavs=false',
+      options: { softNavs: false },
+      serialized: '{"softNavs":false}',
+    },
+    {
+      caseName: 'softNavs=undefined',
+      options: { softNavs: undefined },
+      serialized: '{}',
+    },
+    {
+      caseName: 'debug and softNavs',
+      options: { debug: false, softNavs: false },
+      serialized: '{"debug":false,"softNavs":false}',
+    },
+  ])('forwards $caseName to the plugin', ({ options, serialized }) => {
     const dst = '/tmp/vercel-speed-insights.client.ts';
     addTemplate.mockReturnValue({ dst });
 

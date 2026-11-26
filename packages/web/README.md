@@ -68,6 +68,15 @@ For `injectSpeedInsights`, including the SvelteKit and Nuxt runtime integrations
 injectSpeedInsights({ softNavs: false });
 ```
 
+For the Nuxt module, set the option in `nuxt.config.ts` (see [Nuxt module options](#nuxt-module-options)):
+
+```ts
+export default defineNuxtConfig({
+  modules: ['@vercel/speed-insights'],
+  speedInsights: { softNavs: false },
+})
+```
+
 ## Nuxt module options
 
 The Nuxt module passes its options through to the client plugin, so you can configure it from `nuxt.config.ts`:
