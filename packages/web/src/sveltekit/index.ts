@@ -9,14 +9,31 @@ import { getBasePath, getConfigString } from './utils';
 
 /**
  * Injects Vercel Speed Insights in SvelteKit 2 apps.
+ * In SvelteKit 3, use `@vercel/speed-insights/sveltekit-next` instead:
+ * this entry logs an error there and injects nothing.
  */
 export function injectSpeedInsights(
   props: Omit<SpeedInsightsProps, 'framework'> = {},
 ): void {
   if (browser) {
+    let route: string | null | undefined;
+    try {
+      route = get(page).route?.id;
+    } catch (error) {
+      // SvelteKit 3 keeps `$app/stores` as a stub that throws on first use.
+      // Left alone, the error stops the app from hydrating.
+      if (isAppStoresRemoved(error)) {
+        console.error(
+          '[Vercel Speed Insights] `@vercel/speed-insights/sveltekit` is for SvelteKit 2 and does nothing in SvelteKit 3. Import `injectSpeedInsights` from `@vercel/speed-insights/sveltekit-next` instead.',
+        );
+        return;
+      }
+      throw error;
+    }
+
     const speedInsights = inject(
       {
-        route: get(page).route?.id,
+        route,
         ...props,
         framework: 'sveltekit',
         basePath: getBasePath(),
@@ -33,4 +50,11 @@ export function injectSpeedInsights(
     }
   }
 }
+
+function isAppStoresRemoved(error: unknown): boolean {
+  // The message is `app_stores_removed` plus text in development, and
+  // https://svelte.dev/e/kit/app_stores_removed in production.
+  return error instanceof Error && error.message.includes('app_stores_removed');
+}
+
 export type { SpeedInsightsProps, BeforeSend, BeforeSendEvent };
